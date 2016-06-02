@@ -5,7 +5,10 @@ import {MyCommentComponent} from '../my-comment';
 import {RouteData, Router, RouteParams, OnActivate, ComponentInstruction, CanActivate} from '@angular/router-deprecated';
 import {Http} from '@angular/http';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import { DateHandlerService } from '../date-handler.service'
+import { DateHandlerService } from '../date-handler.service';
+import {MyEventsService} from '../my-events.service';
+import {MyUsersService} from '../my-users.service';
+
 
 @Component({
   moduleId: module.id,
@@ -18,9 +21,11 @@ import { DateHandlerService } from '../date-handler.service'
 })
 //@CanActivate(() => tokenNotExpired())
 export class MyDetailviewComponent implements OnInit {
-//Auto-gen = MyDetailviewComponent - kolla om det gör något.
 
-  constructor(private dateHandlerService: DateHandlerService, @Inject(FirebaseRef) public ref:any, public data: RouteData, public params: RouteParams, private router: Router, public af: AngularFire) {
+  eventId = ""
+  newEvent = false
+
+  constructor(public myUsersService : MyUsersService, public myEventsService: MyEventsService, private dateHandlerService: DateHandlerService, public data: RouteData, public params: RouteParams, private router: Router) {
   }
   event: FullEvent = {name: "",
                       date: "",
@@ -35,31 +40,23 @@ export class MyDetailviewComponent implements OnInit {
                       email: "",
                       uid: null,
                       imageURL: ""}
-
-  //public name = "Placeholder, change to data from db"
-  eventId = ""
-  newEvent = false
+  
   ngOnInit() {
-    this.getEvents();
+    
     // Get uid from sender
-    // this.params = this.injector.parent.get(RouteParams);
     this.eventId = this.params.get('uid');
 
     if (this.eventId==="") {
-      console.log("empty " + this.eventId);
       this.newEvent = true;
     }else {
-      console.log("set " + this.eventId);
-      this.ref.child('/events').child('/'+this.eventId).on("value", (v) => this.event = v.val());
+      this.myEventsService.getEvent(this.eventId).then(result => {
+      console.log("list");
+       this.event = <FullEvent>result;
+    });
     }
 
   }
-
-  getEvents() {
-
-  }
-
-
+  
   save(eid){
     var x : FullEvent = this.event
     if (!this.checkValue()) {
@@ -72,18 +69,16 @@ export class MyDetailviewComponent implements OnInit {
     if (this.newEvent) {
       
       var timeStamp = this.dateHandlerService.getTimeStamp();
-      x.uid = this.ref.getAuth().uid + '-' + timeStamp;
-      var newRef = this.ref.child('/events/' + x.uid).update(x);
+      x.uid = this.myUsersService.loggedInUserId + '-' + timeStamp;
+      var newRef = this.myEventsService.updateEvent(x.uid, x);
       this.router.navigate(['/UserEvents']);
       return false;
 
     }else {
-      this.ref.child('/events').child(this.eventId).update(x);
+      this.myEventsService.updateEvent(x.uid ,x);
       this.router.navigate(['/My-show-detailsview', { uid: x.uid }]);
       return false;
     }
-    //console.log(this.event);
-
   }
 
   checkValue() {
@@ -117,7 +112,7 @@ export class MyDetailviewComponent implements OnInit {
     var x;
     if (confirm("Är du säker?") == true) {
         x = "Evenemanget raderades!";
-        this.ref.child('/events/').child(this.eventId).remove();
+        this.myEventsService.removeEvent(this.eventId);
         this.router.navigate(['/Home']);
     } else {
         x = "Avbröts";
@@ -135,10 +130,4 @@ export class MyDetailviewComponent implements OnInit {
     
     return false;
   }
-
-  addComment() {
-    //Save comment to Event
-    //this.ref.child('/events').child(eventId).child('comments')
-  }
-
 }

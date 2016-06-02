@@ -5,48 +5,34 @@ import {MyCommentComponent} from '../my-comment';
 import {RouteData, RouteParams, OnActivate, ComponentInstruction, CanActivate} from '@angular/router-deprecated';
 import {Http} from '@angular/http';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
+import {MyEventsService} from '../my-events.service';
+import {MyUsersService} from '../my-users.service';
 
 @Component({
   moduleId: module.id,
   selector: 'my-show-detailsview',
   templateUrl: 'my-show-detailsview.component.html',
   styleUrls: ['my-show-detailsview.component.css'],
-  providers: [],
   directives: [MyCommentComponent],
   inputs: ['uid'],
+  providers: [MyEventsService, MyUsersService]
 })
 //@CanActivate(() => tokenNotExpired())
 export class MyShowDetailsviewComponent implements OnInit {
 
-  constructor(public af: AngularFire, @Inject(FirebaseRef) public ref:any, public data: RouteData, public params: RouteParams, private router: Router) {
-  }
-  event: FullEvent = {name: "",
-  date: "",
-  start_time: "",
-  stop_time: "",
-  info: "",
-  adress: "",
-  comments: [""],
-  price: "",
-  organiser: "",
-  phone: "",
-  email: "", 
-  uid: null,
-  imageURL: ""}
-  
-  //FirebaseObjectObservable<Event>
-  
-  //public name = "Placeholder, change to data from db"
+  event = {};
   eventId;
-  
+
+  constructor(public myUsersService: MyUsersService, public myEventsService: MyEventsService, public data: RouteData, public params: RouteParams, private router: Router) {
+  }
+    
   ngOnInit() {
     // Get uid from sender
-    // this.params = this.injector.parent.get(RouteParams);
-    this.eventId = this.params.get('uid');
-    this.ref.child('/events').child('/'+this.eventId).on("value", (v) => this.event = v.val());
-    
-  }
-
+    this.eventId = this.params.get('uid');    
+    this.myEventsService.getEvent(this.eventId).then(result => {
+     this.event = result;
+   });
+  }  
   
   onClick(id){
     this.router.navigate(['/My-detailview', { uid: id }]);
@@ -56,12 +42,10 @@ export class MyShowDetailsviewComponent implements OnInit {
   // Check if the user is allowed to edit a specified event.
   isValid() {
     try {
-      if(this.event.uid.includes(this.ref.getAuth().uid))
+      if(this.event["uid"].includes(this.myUsersService.loggedInUserId))
         return true;      
     }catch(e) {      
       return false;
     }
-  }
-  
-  
+  } 
 }
