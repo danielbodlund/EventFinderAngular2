@@ -4,7 +4,6 @@
 
 nav {
   background-color: rgba(179,115,67, 0);
- 
 }
 
 a {
@@ -39,7 +38,7 @@ button:focus {
 
 #logo {
   margin-top: 7px;
-  margin-left: -50px;
+  margin-left: 10px;
 }
 
 a.router-link-active {
@@ -48,8 +47,9 @@ a.router-link-active {
 
 .navbar {
   background-color: rgba(36, 50, 89, 0.9);
-  box-shadow: 0px 3px 5px rgba(36, 50, 89, 0.9) ;
+  box-shadow: 0px 3px 5px rgba(36, 50, 89, 0.9);
   width: 100% !important;
+  max-height: 70px;
 }
 
 @media screen and (max-width: 770px){
