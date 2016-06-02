@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {DateHandlerService} from './date-handler.service';
+import {EventDataService} from './event-data.service';
 
 
 @Pipe({

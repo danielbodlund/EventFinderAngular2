@@ -1,13 +1,16 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
+import {Carousel} from './carousel.pipe';
+import {FirebaseRef, FirebaseListObservable, AngularFire} from 'angularfire2/angularfire2'
 
 @Injectable()
 export class EventDataService {
 
-  constructor() {
+  constructor(public af: AngularFire,@Inject(FirebaseRef) private ref: any) {
   }
   
-  getEvents() {
-   // return Promise.resolve();
+  getEvents() {   
+   return this.af.database.list('/events');
+   
   }
 }
 
