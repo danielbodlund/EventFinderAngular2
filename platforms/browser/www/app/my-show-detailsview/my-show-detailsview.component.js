@@ -17,11 +17,10 @@ var my_comment_1 = require('../my-comment');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var router_deprecated_2 = require('@angular/router-deprecated');
 var MyShowDetailsviewComponent = (function () {
-    function MyShowDetailsviewComponent(af, ref, data, injector, params, router) {
+    function MyShowDetailsviewComponent(af, ref, data, params, router) {
         this.af = af;
         this.ref = ref;
         this.data = data;
-        this.injector = injector;
         this.params = params;
         this.router = router;
         this.event = { name: "",
@@ -41,7 +40,7 @@ var MyShowDetailsviewComponent = (function () {
     MyShowDetailsviewComponent.prototype.ngOnInit = function () {
         var _this = this;
         // Get uid from sender
-        this.params = this.injector.parent.get(router_deprecated_1.RouteParams);
+        // this.params = this.injector.parent.get(RouteParams);
         this.eventId = this.params.get('uid');
         this.ref.child('/events').child('/' + this.eventId).on("value", function (v) { return _this.event = v.val(); });
     };
@@ -70,9 +69,9 @@ var MyShowDetailsviewComponent = (function () {
             inputs: ['uid'],
         }),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object, router_deprecated_1.RouteData, core_1.ReflectiveInjector, router_deprecated_1.RouteParams, router_deprecated_2.Router])
+        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object, router_deprecated_1.RouteData, router_deprecated_1.RouteParams, router_deprecated_2.Router])
     ], MyShowDetailsviewComponent);
     return MyShowDetailsviewComponent;
 }());
 exports.MyShowDetailsviewComponent = MyShowDetailsviewComponent;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-show-detailsview/my-show-detailsview.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-149e83uy.tmp/0/app/my-show-detailsview/my-show-detailsview.component.js.map

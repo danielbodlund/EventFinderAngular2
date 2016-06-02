@@ -8,18 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
+var angularfire2_1 = require('angularfire2/angularfire2');
 var EventDataService = (function () {
-    function EventDataService() {
+    function EventDataService(af, ref) {
+        this.af = af;
+        this.ref = ref;
     }
     EventDataService.prototype.getEvents = function () {
-        // return Promise.resolve();
+        return this.af.database.list('/events');
     };
     EventDataService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        core_1.Injectable(),
+        __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
+        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object])
     ], EventDataService);
     return EventDataService;
 }());
 exports.EventDataService = EventDataService;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/event-data.service.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-149e83uy.tmp/0/app/event-data.service.js.map
