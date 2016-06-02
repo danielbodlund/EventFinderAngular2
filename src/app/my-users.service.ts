@@ -22,4 +22,11 @@ export class MyUsersService {
   addUser(userId: String, data : any) {
     this._af.database.object("/users/" + userId).set(data);    
   }
+  
+  getUsers() {
+    return new Promise(resolve => {
+      let result = this._af.database.list('/users');
+      resolve(result);
+    });
+  }
 }

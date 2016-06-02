@@ -11,6 +11,7 @@ import {FirebaseRef, FirebaseObjectObservable, FirebaseListObservable} from 'ang
 import {CORE_DIRECTIVES} from '@angular/common';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {MyUserEventsComponent} from './my-user-events'
+import {MyUsersService} from './my-users.service'
 
 @Component({
   moduleId: module.id,
@@ -35,14 +36,18 @@ import {MyUserEventsComponent} from './my-user-events'
 ])
 
 export class EventFinderApp{
-  users: FirebaseListObservable<{}>;
-    constructor(public af : AngularFire, @Inject(FirebaseRef) public ref: any, private router: Router) {}
+  users = {};
+    constructor(private router: Router, public myUserService: MyUsersService) {}
 
   
     ngDoCheck() { 
     if(this.users === undefined) {
       try {
-        this.users =  this.af.database.list('/users/' + this.ref.getAuth().uid);
+        this.myUserService.getUsers().then(result => {
+          this.users = result;
+          
+        });
+        // this.users =  this.af.database.list('/users/' + this.ref.getAuth().uid);
         console.log("hej");
       } catch(e) {
         
@@ -67,7 +72,7 @@ export class EventFinderApp{
   
   public logout() {
     this.users = undefined;
-    this.af.auth.logout();
+    this.myUserService._af.auth.logout();
   }
 
   ngOnInit() {
