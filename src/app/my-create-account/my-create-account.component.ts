@@ -34,13 +34,13 @@ export class MyCreateAccountComponent implements OnInit {
         if(error) {
           switch (error.code) {
             case "EMAIL_TAKEN":
-              this.createAnnotation = 'The new user account cannot be created because the email is already in use.';
+              this.createAnnotation = 'Kontot kunde inte skapas på grund av att mejladressen redan används.';
               break;
             case "INVALID_EMAIL":
-              this.createAnnotation = 'The specified email is not a valid email.';
+              this.createAnnotation = 'Detta är inte en giltig mail.';
               break;
             default:
-              this.createAnnotation = 'Error creating user: ' + error;
+              this.createAnnotation = 'Kunde inte skapa användare: ' + error;
           }
         } else {
           this.createAnnotation = '';

@@ -15,6 +15,10 @@ export class MyEventsService {
     });
   }
   
+  getEvents(){
+    return this.af.database.list('/events');
+  }
+  
   updateEvent(eventId, data) {
     return this.ref.child('/events/' + eventId).update(data);
   }
