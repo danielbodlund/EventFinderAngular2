@@ -24,4 +24,4 @@ document.addEventListener('deviceready', function () {
         my_events_service_1.MyEventsService
     ]);
 }, false);
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-149e83uy.tmp/0/main.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-d0RXkuCR.tmp/0/main.js.map
