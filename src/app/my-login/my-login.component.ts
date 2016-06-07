@@ -1,7 +1,8 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {AngularFire, FirebaseRef} from 'angularfire2';
 import {ROUTER_DIRECTIVES, RouteConfig, Router} from '@angular/router-deprecated'
-import {MyMainComponent} from '../my-main'
+import {MyMainComponent} from '../my-main';
+import {MyUsersService} from '../my-users.service';
 
 @Component({
   moduleId: module.id,
@@ -15,48 +16,46 @@ export class MyLoginComponent implements OnInit {
   password: string;
   loginNotation: string = '';
   
-  constructor(public _af : AngularFire, @Inject(FirebaseRef) private _ref: any, private router: Router) {}
+  constructor(public myUsersService: MyUsersService, private router: Router) {}
   
   ngOnInit() {
     //ost
   }
   
   login() {
-    this._ref.authWithPassword({
-       email    : this.email,
-       password : this.password
-      }, (error, authData) => {
-       if (error) {
+    this.myUsersService.loginUserWithPassword(this.email, this.password).then(result => {
+      let error = result["error"];
+      let userData = result["userData"];
+      
+      if(error) {
         this.loginNotation = error;
-       } else {
+      }else {
         this.router.navigate(['/Home']);
         this.loginNotation = '';
-      }
-    });
+      }      
+    });;
   }
   
   resetPassword() {
-    var str = prompt("Please enter your e-mail");
+   var str = prompt("Please enter your e-mail");
     
     if (str != null) {
      
-        this._ref.child('/users').resetPassword({
-        email: str
-          }, error => {
-             if (error) {
-                switch (error.code) {
-                  case "INVALID_USER":
-                    console.log("The specified user account does not exist.");
-                  break;
-                 default:
-                    console.log("Error resetting password:", error);
-                  }
-                 } else {
-                    console.log("Password reset email sent successfully!");
-                    this.loginNotation = "Temporärt lösenord skickat till " + str;
-                 }
-              });
+      this.myUsersService.resetPassword(str).then(result => {
+        let error = result;
         
+        if(error) {
+          switch (error['code']) {
+            case "INVALID_USER":
+              this.loginNotation = str + " existerar inte.";
+              break;
+            default:
+              console.log("Error resetting password:", error);
+          }
+        }else {
+          this.loginNotation = "Temporärt lösenord skickat till " + str;
+        }      
+      });
     }
   }
   

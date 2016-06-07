@@ -3,6 +3,8 @@ import {EventDataService} from '../event-data.service';
 import {MyTileComponent} from  '../my-tile';
 import {AngularFire, FirebaseListObservable, FirebaseRef} from 'angularfire2';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
+import {MyEventsService} from '../my-events.service';
+import {MyUsersService} from '../my-users.service';
 
 @Component({
   moduleId: module.id,
@@ -15,6 +17,9 @@ export class MyUserEventsComponent implements OnInit {
 
   events: FirebaseListObservable <any []>;
   
+    constructor(public myUsersService: MyUsersService, private router: Router, public myEventsService: MyEventsService) {}
+
+  
   onClick(id) {
     this.router.navigate(['/My-show-detailsview', { uid: id }]);
   }
@@ -23,12 +28,11 @@ export class MyUserEventsComponent implements OnInit {
     this.router.navigate(['/My-detailview', { uid: id }]);
   }
   
-  constructor(public af: AngularFire, private router: Router, @Inject(FirebaseRef) private _ref: any) {}
   
   ngOnInit() {
-    this.events = <FirebaseListObservable <any[]>> this.af.database.list('/events').map(events => {
+    this.events = <FirebaseListObservable <any[]>> this.myEventsService.getEvents().map(events => {
       return events.filter(event => {
-        return event.uid.includes(this._ref.getAuth().uid);
+        return event.uid.includes(this.myUsersService.loggedInUserId);
       });
     });
   }
