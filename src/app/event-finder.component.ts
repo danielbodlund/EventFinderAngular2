@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, NgZone} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
 import {AngularFire} from 'angularfire2';
 import {MyMainComponent} from './my-main';
@@ -10,13 +10,13 @@ import {MyLoginComponent} from './my-login/my-login.component';
 import {FirebaseRef, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {MyUserEventsComponent} from './my-user-events'
-import {MyUsersService} from './my-users.service'
+import {MyUserEventsComponent} from './my-user-events';
+import {MyUsersService} from './my-users.service';
 
 @Component({
   moduleId: module.id,
   selector: 'event-finder-app',
-  providers: [ROUTER_PROVIDERS],
+  providers: [ROUTER_PROVIDERS, MyUsersService],
   templateUrl: 'event-finder.component.html',
   styleUrls: ['event-finder.component.css'],
   directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, DROPDOWN_DIRECTIVES],
@@ -36,23 +36,16 @@ import {MyUsersService} from './my-users.service'
 ])
 
 export class EventFinderApp{
-  users = {};
-    constructor(private router: Router, public myUserService: MyUsersService) {}
+  user: FirebaseObjectObservable<any>;
+  constructor(private router: Router, public myUserService: MyUsersService, 
+  private _ngZone:NgZone, public af: AngularFire) {
+    
+      
 
-  
-    ngDoCheck() { 
-    if(this.users === undefined) {
-      try {
-        this.myUserService.getUsers().then(result => {
-          this.users = result;
-          
-        });
-        // this.users =  this.af.database.list('/users/' + this.ref.getAuth().uid);
-        console.log("hej");
-      } catch(e) {
-        
-      }
-    }
+  }
+    
+  ngDoCheck() { 
+    this.user = this.af.database.object('/users/' + this.myUserService.ref.getAuth().uid);
   }
   
   public disabled:boolean = false;
@@ -71,16 +64,16 @@ export class EventFinderApp{
   }
   
   public logout() {
-    this.users = undefined;
-    this.myUserService._af.auth.logout();
+    this.user = undefined;
+    this.myUserService.auth.logout();
   }
 
   ngOnInit() {
-    //this.logout();
+    
   }
   
   newEventClick() {
-    this.router.navigate(['/My-detailview', { uid: ''}]);
+    this.router.navigate(['/My-detailview']);
     return false;
   }
 }
