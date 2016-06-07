@@ -19,7 +19,9 @@ document.addEventListener('deviceready', function () {
         angularfire2_1.firebaseAuthConfig({
             method: angularfire2_1.AuthMethods.Redirect,
             provider: angularfire2_1.AuthProviders.Password
-        }), my_users_service_1.MyUsersService, my_events_service_1.MyEventsService
+        }),
+        my_users_service_1.MyUsersService,
+        my_events_service_1.MyEventsService
     ]);
 }, false);
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/main.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-149e83uy.tmp/0/main.js.map
