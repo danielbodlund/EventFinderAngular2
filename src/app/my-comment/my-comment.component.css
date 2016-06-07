@@ -35,7 +35,7 @@ img.img-responsive.user-photo {
   width: 100%;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 750px) and (orientation: portrait) {
   
   img.img-responsive.user-photo {
     display: none;
