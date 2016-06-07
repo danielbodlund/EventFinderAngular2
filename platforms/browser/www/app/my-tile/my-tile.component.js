@@ -11,14 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var my_events_service_1 = require('../my-events.service');
 var MyTileComponent = (function () {
-    function MyTileComponent(das) {
+    function MyTileComponent(das, _ngZone) {
         this.das = das;
+        this._ngZone = _ngZone;
         this.event = {};
     }
     MyTileComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.das.getEvent(this.eventId).then(function (result) {
-            _this.event = result;
+            _this._ngZone.run(function () {
+                _this.event = result;
+            });
         });
     };
     __decorate([
@@ -33,9 +36,9 @@ var MyTileComponent = (function () {
             styleUrls: ['my-tile.component.css'],
             providers: [my_events_service_1.MyEventsService]
         }), 
-        __metadata('design:paramtypes', [my_events_service_1.MyEventsService])
+        __metadata('design:paramtypes', [my_events_service_1.MyEventsService, core_1.NgZone])
     ], MyTileComponent);
     return MyTileComponent;
 }());
 exports.MyTileComponent = MyTileComponent;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-tile/my-tile.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-tile/my-tile.component.js.map

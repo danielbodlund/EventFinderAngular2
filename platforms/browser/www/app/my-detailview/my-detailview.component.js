@@ -18,11 +18,10 @@ var router_deprecated_1 = require('@angular/router-deprecated');
 var date_handler_service_1 = require('../date-handler.service');
 var MyDetailviewComponent = (function () {
     //Auto-gen = MyDetailviewComponent - kolla om det gör något.
-    function MyDetailviewComponent(dateHandlerService, ref, data, injector, params, router, af) {
+    function MyDetailviewComponent(dateHandlerService, ref, data, params, router, af) {
         this.dateHandlerService = dateHandlerService;
         this.ref = ref;
         this.data = data;
-        this.injector = injector;
         this.params = params;
         this.router = router;
         this.af = af;
@@ -47,7 +46,7 @@ var MyDetailviewComponent = (function () {
         var _this = this;
         this.getEvents();
         // Get uid from sender
-        this.params = this.injector.parent.get(router_deprecated_1.RouteParams);
+        // this.params = this.injector.parent.get(RouteParams);
         this.eventId = this.params.get('uid');
         if (this.eventId === "") {
             console.log("empty " + this.eventId);
@@ -144,9 +143,9 @@ var MyDetailviewComponent = (function () {
             inputs: ['comments']
         }),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [date_handler_service_1.DateHandlerService, Object, router_deprecated_1.RouteData, core_1.ReflectiveInjector, router_deprecated_1.RouteParams, router_deprecated_1.Router, angularfire2_1.AngularFire])
+        __metadata('design:paramtypes', [date_handler_service_1.DateHandlerService, Object, router_deprecated_1.RouteData, router_deprecated_1.RouteParams, router_deprecated_1.Router, angularfire2_1.AngularFire])
     ], MyDetailviewComponent);
     return MyDetailviewComponent;
 }());
 exports.MyDetailviewComponent = MyDetailviewComponent;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-detailview/my-detailview.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-detailview/my-detailview.component.js.map

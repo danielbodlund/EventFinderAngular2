@@ -9,6 +9,7 @@ img {
   border-radius: 10px;
   box-shadow: 0 0 20px black;
   overflow: hidden;
+  background-color: green;
 }
 
 content {
@@ -18,3 +19,35 @@ content {
 .carousel {
   height: 350px !important;
 }
+
+@media (max-width: 650px) {
+  .imageContent {
+    margin: auto;
+    align-content: center;
+    height: 150px;
+    width: 340px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px black;
+    overflow: hidden;
+  }
+  h4 {
+    font-size: 14px;
+  }
+  .name {
+    font-size: 11px;
+  }
+  .date {
+    font-size: 11px;
+  }
+}
+@media (min-width:651px) and (max-width: 992px) {
+  .imageContent {
+    margin: auto;
+    align-content: center;
+    height: 234px;
+    width: 640px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px black;
+    overflow: hidden;
+  }
+} 

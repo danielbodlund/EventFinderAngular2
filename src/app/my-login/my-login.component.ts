@@ -2,7 +2,6 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {AngularFire, FirebaseRef} from 'angularfire2';
 import {ROUTER_DIRECTIVES, RouteConfig, Router} from '@angular/router-deprecated'
 import {MyMainComponent} from '../my-main'
-
 @Component({
   moduleId: module.id,
   selector: 'my-login',
@@ -10,7 +9,6 @@ import {MyMainComponent} from '../my-main'
   styleUrls: ['my-login.component.css']
 })
 export class MyLoginComponent implements OnInit {
-
   email: string;
   password: string;
   loginNotation: string = '';
@@ -61,3 +59,4 @@ export class MyLoginComponent implements OnInit {
   }
   
 }
+

@@ -4,7 +4,6 @@
 
 nav {
   background-color: rgba(179,115,67, 0);
- 
 }
 
 a {
@@ -37,13 +36,9 @@ button:focus {
   border: 0px;
 }
 
-.btn-group {
-  box-shadow: 0px 0px 10px black;
-}
-
 #logo {
   margin-top: 7px;
-  margin-left: -50px;
+  margin-left: 10px;
 }
 
 a.router-link-active {
@@ -52,14 +47,21 @@ a.router-link-active {
 
 .navbar {
   background-color: rgba(36, 50, 89, 0.9);
-  box-shadow: 0px 3px 5px rgba(36, 50, 89, 0.9) ;
+  box-shadow: 0px 3px 5px rgba(36, 50, 89, 0.9);
   width: 100% !important;
+  max-height: 70px;
 }
 
 @media screen and (max-width: 770px){
   
+  .navbar-nav .open .dropdown-menu {
+    background-color: white;
+    margin-top: 15px;
+  }
+  
   #logo{
     margin-left: 5px;
+    width: 130px;
   }
   
   .navbar button {
@@ -71,7 +73,13 @@ a.router-link-active {
   }
   
   .container2 {
-    margin-top:150px;
+    margin-top:100px;
   }
   
+  .dropdown {
+    margin: 20px;
+    float: right;
+    margin-top: -21px;
+    margin-right: 22px;
+  }
 }

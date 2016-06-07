@@ -11,7 +11,6 @@ import {FirebaseRef, FirebaseObjectObservable, FirebaseListObservable} from 'ang
 import {CORE_DIRECTIVES} from '@angular/common';
 import {DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {MyUserEventsComponent} from './my-user-events'
-
 @Component({
   moduleId: module.id,
   selector: 'event-finder-app',
@@ -21,9 +20,7 @@ import {MyUserEventsComponent} from './my-user-events'
   directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, DROPDOWN_DIRECTIVES],
   pipes: []
 })
-
 @RouteConfig([
-
   {path: '/home', name: 'Home', component: MyMainComponent, useAsDefault: true},
   {path: '/my-detailview', name: 'My-detailview', component: MyDetailviewComponent},
   {path: '/my-show-detailsview', name: 'My-show-detailsview', component: MyShowDetailsviewComponent},
@@ -33,11 +30,9 @@ import {MyUserEventsComponent} from './my-user-events'
   {path: '/my-profile-settings', name: 'Settings', component: MyProfileSettingsComponent},
   {path: '/*path', component: MyMainComponent}
 ])
-
 export class EventFinderApp{
   users: FirebaseListObservable<{}>;
     constructor(public af : AngularFire, @Inject(FirebaseRef) public ref: any, private router: Router) {}
-
   
     ngDoCheck() { 
     if(this.users === undefined) {
@@ -54,11 +49,9 @@ export class EventFinderApp{
   public status:{isopen:boolean} = {isopen: false};
   public items:Array<string> = ['The first choice!',
     'And another choice for you.', 'but wait! A third!'];
-
   public toggled(open:boolean):void {
     console.log('Dropdown is now: ', open);
   }
-
   public toggleDropdown($event:MouseEvent):void {
     $event.preventDefault();
     $event.stopPropagation();
@@ -69,7 +62,6 @@ export class EventFinderApp{
     this.users = undefined;
     this.af.auth.logout();
   }
-
   ngOnInit() {
     //this.logout();
   }

@@ -16,10 +16,9 @@ var angularfire2_1 = require('angularfire2');
 var my_reverse_array_pipe_1 = require('../my-reverse-array.pipe');
 var date_handler_service_1 = require('../date-handler.service');
 var MyCommentComponent = (function () {
-    function MyCommentComponent(dateHandlerService, ref, injector) {
+    function MyCommentComponent(dateHandlerService, ref) {
         this.dateHandlerService = dateHandlerService;
         this.ref = ref;
-        this.injector = injector;
         this.commentText = "";
     }
     MyCommentComponent.prototype.ngOnInit = function () {
@@ -96,9 +95,9 @@ var MyCommentComponent = (function () {
             pipes: [my_reverse_array_pipe_1.MyReverseArray]
         }),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [date_handler_service_1.DateHandlerService, Object, core_1.ReflectiveInjector])
+        __metadata('design:paramtypes', [date_handler_service_1.DateHandlerService, Object])
     ], MyCommentComponent);
     return MyCommentComponent;
 }());
 exports.MyCommentComponent = MyCommentComponent;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-comment/my-comment.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-comment/my-comment.component.js.map

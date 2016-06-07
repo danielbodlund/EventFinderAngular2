@@ -6,4 +6,4 @@ testing_1.describe('MyUsers Service', function () {
     testing_1.it('should ...', testing_1.inject([my_users_service_1.MyUsersService], function (service) {
     }));
 });
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-users.service.spec.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-users.service.spec.js.map

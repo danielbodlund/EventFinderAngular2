@@ -33,6 +33,13 @@ var MyUsersService = (function () {
     MyUsersService.prototype.addUser = function (userId, data) {
         this._af.database.object("/users/" + userId).set(data);
     };
+    MyUsersService.prototype.getUsers = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var result = _this._af.database.list('/users');
+            resolve(result);
+        });
+    };
     MyUsersService = __decorate([
         core_1.Injectable(),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
@@ -41,4 +48,4 @@ var MyUsersService = (function () {
     return MyUsersService;
 }());
 exports.MyUsersService = MyUsersService;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-users.service.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-users.service.js.map

@@ -4,6 +4,7 @@ import {MyTileComponent} from  '../my-tile';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
 import {Search} from '../search.pipe';
+import {MyEventsService} from '../my-events.service';
 
 @Component({
   moduleId: module.id,
@@ -16,16 +17,16 @@ import {Search} from '../search.pipe';
 })
 export class MyEventContainerComponent implements OnInit {
   @Input() searchText;
-  events: FirebaseListObservable <any []>;
+  events = {};
   
   onClick(id) {
     this.router.navigate(['/My-show-detailsview', { uid: id }]);
   }
   
-  constructor(public af: AngularFire, private router: Router) {}
+  constructor(private router: Router, public myEventService: MyEventsService) {}
   
-  ngOnInit() {
-    this.events = this.af.database.list('/events');
+  ngOnInit() {    
+    this.events = this.myEventService.getEvents();
   }
 
 }

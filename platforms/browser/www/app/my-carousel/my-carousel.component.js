@@ -17,16 +17,19 @@ var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var angularfire2_1 = require('angularfire2/angularfire2');
 var carousel_pipe_1 = require('../carousel.pipe');
 var router_deprecated_1 = require('@angular/router-deprecated');
+var event_data_service_1 = require('../event-data.service');
 var MyCarouselComponent = (function () {
-    function MyCarouselComponent(af, _ref, router) {
+    function MyCarouselComponent(af, _ref, router, slideService, _ngZone) {
         this.af = af;
         this._ref = _ref;
         this.router = router;
+        this.slideService = slideService;
+        this._ngZone = _ngZone;
         this.myInterval = 5000;
         this.noWrapSlides = false;
     }
     MyCarouselComponent.prototype.ngOnInit = function () {
-        this.slides = this.af.database.list('/events');
+        this.slides = this.slideService.getEvents();
     };
     MyCarouselComponent.prototype.onClicked = function (id) {
         console.log("Klickad");
@@ -39,12 +42,13 @@ var MyCarouselComponent = (function () {
             directives: [ng2_bootstrap_1.CAROUSEL_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
             templateUrl: 'my-carousel.component.html',
             styleUrls: ['my-carousel.component.css'],
-            pipes: [carousel_pipe_1.Carousel]
+            pipes: [carousel_pipe_1.Carousel],
+            providers: [event_data_service_1.EventDataService]
         }),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object, router_deprecated_1.Router])
+        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object, router_deprecated_1.Router, event_data_service_1.EventDataService, core_1.NgZone])
     ], MyCarouselComponent);
     return MyCarouselComponent;
 }());
 exports.MyCarouselComponent = MyCarouselComponent;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinder/tmp/broccoli_type_script_compiler-input_base_path-1fYFoSrg.tmp/0/app/my-carousel/my-carousel.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-carousel/my-carousel.component.js.map
