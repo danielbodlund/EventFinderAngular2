@@ -1,4 +1,4 @@
-<div class="container">
+
   <div class="span4 well">
     <form accept-charset="UTF-8" action="" method="POST">
       <textarea class="span4" class="new_message" name="new_message"
@@ -7,7 +7,7 @@
         <button class="btn btn-info" type="submit" (click)="postComment()">Skicka</button>
     </form>
   </div>
-</div>
+
 
     <div *ngIf="commentsCount() > 0">
       <div *ngFor="let comment of comments | myReverseArray">
