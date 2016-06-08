@@ -5,15 +5,15 @@ export class DateHandlerService {
 
   constructor() {}
   getDate(){
-    var date = new Date().toLocaleDateString();
-    return date;
+    var start_date = new Date().toLocaleDateString();
+    return start_date;
   }
 
   getTime(){
-    var date = new Date();
+    var start_date = new Date();
     
-    var h = date.getHours();
-    var m = date.getMinutes();
+    var h = start_date.getHours();
+    var m = start_date.getMinutes();
     var time;
     if (m < 10) {
       time = h + ":0" + m;

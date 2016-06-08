@@ -28,14 +28,15 @@ export class MyDetailviewComponent implements OnInit {
   constructor(public myUsersService : MyUsersService, public myEventsService: MyEventsService, private dateHandlerService: DateHandlerService, public data: RouteData, public params: RouteParams, private router: Router) {
   }
   event: FullEvent = {name: "",
-                      date: "",
+                      start_date: "",
+                      end_date:"",
                       start_time: "",
-                      stop_time: "",
-                      info: "",
+                      end_time: "",
+                      description: "",
                       adress: "",
                       comments: [null],
                       price: "",
-                      organiser: "",
+                      organizer: "",
                       phone: "",
                       email: "",
                       uid: null,
@@ -84,14 +85,15 @@ export class MyDetailviewComponent implements OnInit {
   checkValue() {
     console.log("inside checkValue")
     var newEvent = {name: this.event.name,
-                    date: this.event.date,
+                    start_date: this.event.start_date,
+                    end_date: this.event.end_date,
                     start_time: this.event.start_time,
-                    stop_time: this.event.stop_time,
-                    info: this.event.info,
+                    end_time: this.event.end_time,
+                    description: this.event.description,
                     adress: this.event.adress,
                     comments: [null],
                     price: this.event.price,
-                    organiser: this.event.organiser,
+                    organizer: this.event.organizer,
                     phone: this.event.phone,
                     email: this.event.email}
     for (var i in newEvent) {

@@ -14,8 +14,8 @@ export class Carousel implements PipeTransform {
     return value.map(items => {
       // Filtered array of names
       let arr = items.filter(item => {
-        console.log(item.date === dateHandler.getDate());
-        if (item.date === dateHandler.getDate()){
+        console.log(item.start_date === dateHandler.getDate());
+        if (item.start_date === dateHandler.getDate()){
           console.log(item);
           return item;
         } 

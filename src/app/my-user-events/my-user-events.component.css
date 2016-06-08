@@ -19,6 +19,7 @@
   border: dashed white;
   border-radius: 10px;
   text-align: center;
+  margin: 5px;
 }
 
 .add-event:hover {
@@ -29,9 +30,7 @@
 img {
     width: 80%;
     border-radius: 10px;
-    vertical-align: middle;
-    display: table-cell;
-    
+    padding: auto;
 }
 
 .title {
