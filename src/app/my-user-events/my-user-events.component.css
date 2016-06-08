@@ -14,17 +14,24 @@
 }
 
 .add-event {
-  height: 250px;
-  width: 250px;
-  padding: 0px;
-  margin: 5px;
-  /*background-color: rgba(255,255,255,0.3);*/
+  width: 190px;
+  height: 208px;
+  border: dashed white;
+  border-radius: 10px;
+  text-align: center;
 }
 
+.add-event:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
 img {
-    height: 253.5px;
-    width: 250px;
+    width: 80%;
     border-radius: 10px;
+    vertical-align: middle;
+    display: table-cell;
+    
 }
 
 .title {
@@ -35,9 +42,6 @@ img {
     font-weight: bold;
     color: black;
     text-align: left;
-}
-img:hover {
-  background-color: rgba(255, 255, 255, 0.3);
 }
 
 legend {
@@ -58,12 +62,13 @@ legend {
 @media (max-width: 768px) {
   .container {
     width: 90%;
+    padding: 10px;
   }
 }
 
-/*
-.add-event > .test {
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.3);
-*/
-
+@media (max-width: 650px) {
+  .add-event {
+  width: 140px;
+  height: 162px;
+  }
+}
