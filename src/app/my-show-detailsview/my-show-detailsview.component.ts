@@ -8,6 +8,8 @@ import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from '@angular/router-depre
 import {MyEventsService} from '../my-events.service';
 import {MyUsersService} from '../my-users.service';
 
+declare var google: any;
+
 @Component({
   moduleId: module.id,
   selector: 'my-show-detailsview',
@@ -22,6 +24,7 @@ export class MyShowDetailsviewComponent implements OnInit {
 
   event = {};
   eventId;
+  map = null;
 
   constructor(public myUsersService: MyUsersService, public myEventsService: MyEventsService, public data: RouteData, public params: RouteParams, private router: Router) {
   }
@@ -32,7 +35,7 @@ export class MyShowDetailsviewComponent implements OnInit {
     this.myEventsService.getEvent(this.eventId).then(result => {
      this.event = result;
    });
-  }  
+  }
   
   onClick(id){
     this.router.navigate(['/My-detailview', { uid: id }]);

@@ -34,11 +34,9 @@ h5 {
   color: #fdbbb5;
 }
 
-/*
-label {
-  color: black;
-  background-color: #E0E0E0;
-}*/
+#map {
+  width: 100%;
+}
 
 button {
   background-color: rgba(253, 187, 181, 0.7);
