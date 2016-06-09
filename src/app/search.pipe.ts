@@ -13,7 +13,7 @@ export class Search implements PipeTransform {
         let arr = items.filter(item => item.name.toLocaleLowerCase().includes(term));
         
         // Filtered array of info
-        let arr2 = items.filter(item => item.info.toLocaleLowerCase().includes(term));
+        let arr2 = items.filter(item => item.description.toLocaleLowerCase().includes(term));
         
         // Adds the two arrays togheter and removes duplicates
         let result = arr.concat(arr2.filter((item) => {
