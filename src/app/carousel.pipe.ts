@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {DateHandlerService} from './date-handler.service';
 import {EventDataService} from './event-data.service';
 
 
@@ -10,16 +9,20 @@ export class Carousel implements PipeTransform {
   constructor(){}
 
    transform(value: any[], term): any[] {
-     let dateHandler = new DateHandlerService();
+     
     return value.map(items => {
+      var itemIndex = -1;
       // Filtered array of names
+      
+      items = items.reverse();
       let arr = items.filter(item => {
-        console.log(item.start_date === dateHandler.getDate());
-        if (item.start_date === dateHandler.getDate()){
-          console.log(item);
-          return item;
-        } 
-       // return item.date === dateHandler.getDate();
+        
+        if (itemIndex < 4){
+          console.log(itemIndex);
+          itemIndex += 1;
+          return items[itemIndex];
+        }
+        
       });
       return arr;
    

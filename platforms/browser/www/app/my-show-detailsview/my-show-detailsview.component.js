@@ -8,41 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
-var angularfire2_1 = require('angularfire2');
 var my_comment_1 = require('../my-comment');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var router_deprecated_2 = require('@angular/router-deprecated');
+var my_events_service_1 = require('../my-events.service');
+var my_users_service_1 = require('../my-users.service');
 var MyShowDetailsviewComponent = (function () {
-    function MyShowDetailsviewComponent(af, ref, data, params, router) {
-        this.af = af;
-        this.ref = ref;
+    function MyShowDetailsviewComponent(myUsersService, myEventsService, data, params, router) {
+        this.myUsersService = myUsersService;
+        this.myEventsService = myEventsService;
         this.data = data;
         this.params = params;
         this.router = router;
-        this.event = { name: "",
-            date: "",
-            start_time: "",
-            stop_time: "",
-            info: "",
-            adress: "",
-            comments: [""],
-            price: "",
-            organiser: "",
-            phone: "",
-            email: "",
-            uid: null,
-            imageURL: "" };
+        this.event = {};
     }
     MyShowDetailsviewComponent.prototype.ngOnInit = function () {
         var _this = this;
         // Get uid from sender
-        // this.params = this.injector.parent.get(RouteParams);
         this.eventId = this.params.get('uid');
-        this.ref.child('/events').child('/' + this.eventId).on("value", function (v) { return _this.event = v.val(); });
+        this.myEventsService.getEvent(this.eventId).then(function (result) {
+            _this.event = result;
+        });
     };
     MyShowDetailsviewComponent.prototype.onClick = function (id) {
         this.router.navigate(['/My-detailview', { uid: id }]);
@@ -51,7 +38,7 @@ var MyShowDetailsviewComponent = (function () {
     // Check if the user is allowed to edit a specified event.
     MyShowDetailsviewComponent.prototype.isValid = function () {
         try {
-            if (this.event.uid.includes(this.ref.getAuth().uid))
+            if (this.event["uid"].includes(this.myUsersService.loggedInUserId))
                 return true;
         }
         catch (e) {
@@ -64,14 +51,13 @@ var MyShowDetailsviewComponent = (function () {
             selector: 'my-show-detailsview',
             templateUrl: 'my-show-detailsview.component.html',
             styleUrls: ['my-show-detailsview.component.css'],
-            providers: [],
             directives: [my_comment_1.MyCommentComponent],
             inputs: ['uid'],
-        }),
-        __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object, router_deprecated_1.RouteData, router_deprecated_1.RouteParams, router_deprecated_2.Router])
+            providers: [my_events_service_1.MyEventsService, my_users_service_1.MyUsersService]
+        }), 
+        __metadata('design:paramtypes', [my_users_service_1.MyUsersService, my_events_service_1.MyEventsService, router_deprecated_1.RouteData, router_deprecated_1.RouteParams, router_deprecated_2.Router])
     ], MyShowDetailsviewComponent);
     return MyShowDetailsviewComponent;
 }());
 exports.MyShowDetailsviewComponent = MyShowDetailsviewComponent;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-show-detailsview/my-show-detailsview.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-1D005bXy.tmp/0/app/my-show-detailsview/my-show-detailsview.component.js.map

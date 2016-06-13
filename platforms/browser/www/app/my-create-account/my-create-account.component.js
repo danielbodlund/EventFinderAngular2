@@ -33,13 +33,13 @@ var MyCreateAccountComponent = (function () {
                 if (error) {
                     switch (error.code) {
                         case "EMAIL_TAKEN":
-                            _this.createAnnotation = 'The new user account cannot be created because the email is already in use.';
+                            _this.createAnnotation = 'Kontot kunde inte skapas på grund av att mejladressen redan används.';
                             break;
                         case "INVALID_EMAIL":
-                            _this.createAnnotation = 'The specified email is not a valid email.';
+                            _this.createAnnotation = 'Detta är inte en giltig mail.';
                             break;
                         default:
-                            _this.createAnnotation = 'Error creating user: ' + error;
+                            _this.createAnnotation = 'Kunde inte skapa användare: ' + error;
                     }
                 }
                 else {
@@ -71,4 +71,4 @@ var MyCreateAccountComponent = (function () {
     return MyCreateAccountComponent;
 }());
 exports.MyCreateAccountComponent = MyCreateAccountComponent;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-create-account/my-create-account.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-1D005bXy.tmp/0/app/my-create-account/my-create-account.component.js.map
