@@ -8,6 +8,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import { DateHandlerService } from '../date-handler.service';
 import {MyEventsService} from '../my-events.service';
 import {MyUsersService} from '../my-users.service';
+import {MyGoogleAutoCompleteComponent} from '../my-google-auto-complete'
 
 
 @Component({
@@ -16,7 +17,7 @@ import {MyUsersService} from '../my-users.service';
   templateUrl: 'my-detailview.component.html',
   styleUrls: ['my-detailview.component.css'],
   providers: [DateHandlerService],
-  directives: [MyCommentComponent],
+  directives: [MyCommentComponent, MyGoogleAutoCompleteComponent], 
   inputs: ['comments']
 })
 //@CanActivate(() => tokenNotExpired())
