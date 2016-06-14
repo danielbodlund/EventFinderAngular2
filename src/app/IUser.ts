@@ -1,4 +1,5 @@
 export interface User {
+  gravatar: string,
   username: string,
   uid: string,
   events: [string],

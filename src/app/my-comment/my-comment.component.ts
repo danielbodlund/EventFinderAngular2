@@ -38,6 +38,7 @@ export class MyCommentComponent implements OnInit {
     var time = this.dateHandlerService.getTime();
     var comment : Comment = {
         username: "Anonym",
+        gravatar: 'none',
         time: time,
         date: date,
         text: text
@@ -47,6 +48,8 @@ export class MyCommentComponent implements OnInit {
         // Get the username of the logged in user.
         this.ref.child('/users/' + this.ref.getAuth().uid).once('value', user => {
           comment.username = user.val().username;
+          comment.gravatar = this.ref.getAuth().password.profileImageURL;
+          console.log(comment.gravatar);
           this.ref.child('/events').child('/'+this.uid).child('/comments/'+this.comments.length).update(comment);
           this.commentText = "";
           return false;
