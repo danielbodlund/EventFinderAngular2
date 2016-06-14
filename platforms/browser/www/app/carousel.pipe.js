@@ -9,21 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var date_handler_service_1 = require('./date-handler.service');
 var Carousel = (function () {
     function Carousel() {
     }
     Carousel.prototype.transform = function (value, term) {
-        var dateHandler = new date_handler_service_1.DateHandlerService();
         return value.map(function (items) {
+            var itemIndex = -1;
             // Filtered array of names
+            items = items.reverse();
             var arr = items.filter(function (item) {
-                console.log(item.start_date === dateHandler.getDate());
-                if (item.start_date === dateHandler.getDate()) {
-                    console.log(item);
-                    return item;
+                if (itemIndex < 4) {
+                    console.log(itemIndex);
+                    itemIndex += 1;
+                    return items[itemIndex];
                 }
-                // return item.date === dateHandler.getDate();
             });
             return arr;
             // Adds the two arrays togheter and removes duplicates
@@ -38,4 +37,4 @@ var Carousel = (function () {
     return Carousel;
 }());
 exports.Carousel = Carousel;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-1D005bXy.tmp/0/app/carousel.pipe.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/carousel.pipe.js.map
