@@ -10,19 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var my_tile_1 = require('../my-tile');
-var angularfire2_1 = require('angularfire2');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var search_pipe_1 = require('../search.pipe');
+var my_events_service_1 = require('../my-events.service');
 var MyEventContainerComponent = (function () {
-    function MyEventContainerComponent(af, router) {
-        this.af = af;
+    function MyEventContainerComponent(router, myEventService) {
         this.router = router;
+        this.myEventService = myEventService;
+        this.events = {};
     }
     MyEventContainerComponent.prototype.onClick = function (id) {
         this.router.navigate(['/My-show-detailsview', { uid: id }]);
     };
     MyEventContainerComponent.prototype.ngOnInit = function () {
-        this.events = this.af.database.list('/events');
+        this.events = this.myEventService.getEvents();
     };
     __decorate([
         core_1.Input(), 
@@ -38,9 +39,9 @@ var MyEventContainerComponent = (function () {
             inputs: ['eventId', 'searchText'],
             pipes: [search_pipe_1.Search]
         }), 
-        __metadata('design:paramtypes', [angularfire2_1.AngularFire, router_deprecated_1.Router])
+        __metadata('design:paramtypes', [router_deprecated_1.Router, my_events_service_1.MyEventsService])
     ], MyEventContainerComponent);
     return MyEventContainerComponent;
 }());
 exports.MyEventContainerComponent = MyEventContainerComponent;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-event-container/my-event-container.component.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-event-container/my-event-container.component.js.map

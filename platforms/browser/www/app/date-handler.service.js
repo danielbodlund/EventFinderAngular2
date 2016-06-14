@@ -13,13 +13,13 @@ var DateHandlerService = (function () {
     function DateHandlerService() {
     }
     DateHandlerService.prototype.getDate = function () {
-        var date = new Date().toLocaleDateString();
-        return date;
+        var start_date = new Date().toLocaleDateString();
+        return start_date;
     };
     DateHandlerService.prototype.getTime = function () {
-        var date = new Date();
-        var h = date.getHours();
-        var m = date.getMinutes();
+        var start_date = new Date();
+        var h = start_date.getHours();
+        var m = start_date.getMinutes();
         var time;
         if (m < 10) {
             time = h + ":0" + m;
@@ -39,4 +39,4 @@ var DateHandlerService = (function () {
     return DateHandlerService;
 }());
 exports.DateHandlerService = DateHandlerService;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/date-handler.service.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/date-handler.service.js.map

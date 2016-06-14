@@ -13,17 +13,22 @@ var Search = (function () {
     function Search() {
     }
     Search.prototype.transform = function (value, term) {
-        return value.map(function (items) {
-            // Filtered array of names
-            var arr = items.filter(function (item) { return item.name.toLocaleLowerCase().includes(term); });
-            // Filtered array of info
-            var arr2 = items.filter(function (item) { return item.info.toLocaleLowerCase().includes(term); });
-            // Adds the two arrays togheter and removes duplicates
-            var result = arr.concat(arr2.filter(function (item) {
-                return arr.indexOf(item) < 0;
-            }));
-            return result.length > 0 ? result : ["no-events"];
-        });
+        if (value !== undefined) {
+            return value.map(function (items) {
+                // Filtered array of names
+                var arr = items.filter(function (item) { return item.name.toLocaleLowerCase().includes(term); });
+                // Filtered array of info
+                var arr2 = items.filter(function (item) { return item.description.toLocaleLowerCase().includes(term); });
+                // Adds the two arrays togheter and removes duplicates
+                var result = arr.concat(arr2.filter(function (item) {
+                    return arr.indexOf(item) < 0;
+                }));
+                return result.length > 0 ? result : ["no-events"];
+            });
+        }
+        else {
+            return ["no-events"];
+        }
     };
     Search = __decorate([
         core_1.Pipe({
@@ -34,4 +39,4 @@ var Search = (function () {
     return Search;
 }());
 exports.Search = Search;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/search.pipe.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/search.pipe.js.map

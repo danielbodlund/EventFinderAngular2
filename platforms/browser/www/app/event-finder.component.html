@@ -10,7 +10,7 @@
     </ul> -->
     
      <ul class="nav navbar-nav navbar-right">
-      <div *ngIf="!(myUserService.auth | async)">      
+      <div *ngIf="!(af.auth | async)">      
         <div class="btn-group dropdown" dropdown>          
           <button id="split-button" type="button" class="btn btn-danger" [routerLink]="['Login']">Inte inloggad</button>
           <button type="button" class="btn btn-danger dropdown-toggle" dropdownToggle>
@@ -23,9 +23,8 @@
           </ul>
         </div>
       </div>
-
       <!-- Split button -->
-      <span *ngIf="myUserService.auth | async">
+      <span *ngIf="af.auth | async">
         <div *ngFor="let user of users | async">
           <div *ngIf="user.$key === 'username'" >
             <div class="btn-group dropdown" dropdown>          
@@ -50,8 +49,6 @@
     </ul>
   </div>
 </nav>
-
 <div class="container2">
   <router-outlet></router-outlet>
 </div>
-

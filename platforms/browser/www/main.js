@@ -16,6 +16,7 @@ document.addEventListener('deviceready', function () {
         angularfire2_1.FIREBASE_PROVIDERS,
         router_deprecated_1.ROUTER_PROVIDERS,
         angularfire2_1.defaultFirebase('https://sizzling-heat-4438.firebaseio.com'),
+        //storageBucket('gs://sizzling-heat-4438.appspot.com'),
         angularfire2_1.firebaseAuthConfig({
             method: angularfire2_1.AuthMethods.Redirect,
             provider: angularfire2_1.AuthProviders.Password
@@ -24,4 +25,4 @@ document.addEventListener('deviceready', function () {
         my_events_service_1.MyEventsService
     ]);
 }, false);
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/main.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/main.js.map

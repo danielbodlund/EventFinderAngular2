@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, NgZone} from '@angular/core';
 import {Event, FullEvent} from '../IEvent';
 import {AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef} from 'angularfire2';
 import {MyCommentComponent} from '../my-comment';
@@ -8,6 +8,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import { DateHandlerService } from '../date-handler.service';
 import {MyEventsService} from '../my-events.service';
 import {MyUsersService} from '../my-users.service';
+import {CameraService} from '../camera.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import {MyUsersService} from '../my-users.service';
   selector: 'my-detailview',
   templateUrl: 'my-detailview.component.html',
   styleUrls: ['my-detailview.component.css'],
-  providers: [DateHandlerService],
+  providers: [DateHandlerService, CameraService], 
   directives: [MyCommentComponent],
   inputs: ['comments']
 })
@@ -24,8 +25,16 @@ export class MyDetailviewComponent implements OnInit {
 
   eventId = ""
   newEvent = false
+  imgSrc: HTMLImageElement; 
 
-  constructor(public myUsersService : MyUsersService, public myEventsService: MyEventsService, private dateHandlerService: DateHandlerService, public data: RouteData, public params: RouteParams, private router: Router) {
+  constructor(public myUsersService : MyUsersService, 
+              public myEventsService: MyEventsService, 
+              private dateHandlerService: DateHandlerService, 
+              public data: RouteData, 
+              public params: RouteParams, 
+              private router: Router, 
+              private _zone : NgZone,
+              public cameraService : CameraService) {
   }
   event: FullEvent = {name: "",
                       start_date: "",
@@ -132,4 +141,129 @@ export class MyDetailviewComponent implements OnInit {
     
     return false;
   }
+  
+  takePicture() {
+    console.log("take photo");
+    navigator.camera.getPicture((src) => {
+      /*this._zone.run(() => {
+        console.log("inside zone...");
+        //var encodedImgae = window.btoa(src);
+        //this.event.imageURL = window.atob(encodedImgae);
+        //this.event.imageURL = "data:image/jpeg;base64," + src;
+        //this.event.imageURL = this.encodeImageUri(src);
+        //console.log(src);
+        //this.cameraService.uploadData(src);
+        //this.debug(src);
+      });*/
+      console.log("inside getPicture callback");
+      this.getFileContentAsBase64(src, (base64Image) => {
+      //window.open(base64Image);
+      console.log(base64Image); 
+      this._zone.run(() => {
+        console.log("inside _zone callback");
+        this.event.imageURL = base64Image;
+        console.log(this.event.imageURL);
+      });
+      // Then you'll be able to handle the myimage.png file as base64
+      console.log("end of getPicutre success callback");  
+    });
+    console.log("Last step inside success callback");
+    console.log(this.event.imageURL);  
+    }, (error) => {
+      alert("error" + error);
+    }, {
+      quality: 1,
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.CAMERA
+    });
+  }
+  
+ /* 
+ //Test to encode image separately
+  encodeImageUri(imageUri) {
+     var c=document.createElement('canvas');
+     var ctx=c.getContext("2d");
+     var img=new Image();
+     img.onload = function(){
+       c.width=this.width;
+       c.height=this.height;
+       ctx.drawImage(img, 0,0);
+     };
+     img.src=imageUri;
+     var dataURL = c.toDataURL("image/jpeg");
+     return dataURL;
+  }
+  */
+  
+  /*
+  //Test to do exacly as Cordova docs show
+  capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+      navigator.camera.getPicture(this.onPhotoDataSuccess, this.onFail, { quality: 20, allowEdit: true,
+        destinationType: Camera.DestinationType.DATA_URL });
+  }
+  
+  onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64 encoded image data
+      // console.log(imageData);
+
+      // Get image handle
+      //
+
+      // Unhide image elements
+      //
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      this.imgSrc = document.getElementsByTagName('img');
+      imgSrc.style.display = 'block';
+      
+      this._zone.run(() => {
+        //this.event.imageURL = "data:image/jpeg;base64," + imageData;
+        imgSrc.src = "data:image/jpeg;base64," + imageData;
+      });
+    }
+    
+    onFail(message) {
+      alert('Failed because: ' + message);
+    }*/
+    
+    //Test to do encoding with FileReader solution
+    
+    getFileContentAsBase64(path,callback){
+      console.log("inside getFileContent");
+      window.resolveLocalFileSystemURL(path, gotFile, fail);
+      
+      function fail(e) {
+          alert('Cannot found requested file');
+      }
+     
+      function gotFile(fileEntry) {
+        console.log("inside gotFile")
+           fileEntry.file(function(file) {
+
+             console.log("inside gotFile callback 1 ");
+             //Kommer inte hit på Android ... alls ... 
+             /*console.log(file);
+              var reader = new FileReader();
+              reader.onloadend = function(e) {
+                console.log("inside onloadedend callback");
+                console.log(e);
+                   var content = this.result;
+                   callback(content);
+              };
+              // The most important point, use the readAsDatURL Method from the file plugin
+              reader.readAsDataURL(file);*/
+           });
+      console.log("gotFile end");     
+      }
+      console.log("getFileContent end");
+    }
+  
+  debug(stuff) {
+    console.log(stuff);
+    this.cameraService.uploadData(stuff);
+  }
 }
+

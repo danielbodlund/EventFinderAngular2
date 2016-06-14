@@ -30,6 +30,26 @@ var MyUsersService = (function () {
             });
         });
     };
+    MyUsersService.prototype.loginUserWithPassword = function (email, password) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this._ref.authWithPassword({
+                email: email,
+                password: password
+            }, function (error, userData) {
+                var result = { "error": error, "userData": userData };
+                resolve(result);
+            });
+        });
+    };
+    MyUsersService.prototype.resetPassword = function (email) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this._ref.child('/users').resetPassword({ email: email }, function (error) {
+                resolve(error);
+            });
+        });
+    };
     MyUsersService.prototype.addUser = function (userId, data) {
         this._af.database.object("/users/" + userId).set(data);
     };
@@ -40,6 +60,35 @@ var MyUsersService = (function () {
             resolve(result);
         });
     };
+    MyUsersService.prototype.getUser = function (uid) {
+        /*return new Promise(resolve => {
+          let result = this._ref.child('/users/' + uid).on('value', result => {
+            resolve(result.exportVal());
+          });
+        });  */
+        return this._af.database.object('/users/' + uid);
+    };
+    Object.defineProperty(MyUsersService.prototype, "loggedInUserId", {
+        get: function () {
+            return this._ref.getAuth().uid;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MyUsersService.prototype, "auth", {
+        get: function () {
+            return this._af.auth;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MyUsersService.prototype, "ref", {
+        get: function () {
+            return this._ref;
+        },
+        enumerable: true,
+        configurable: true
+    });
     MyUsersService = __decorate([
         core_1.Injectable(),
         __param(1, core_1.Inject(angularfire2_1.FirebaseRef)), 
@@ -48,4 +97,4 @@ var MyUsersService = (function () {
     return MyUsersService;
 }());
 exports.MyUsersService = MyUsersService;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-users.service.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-users.service.js.map

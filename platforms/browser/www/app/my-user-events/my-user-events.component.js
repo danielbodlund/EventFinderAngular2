@@ -8,18 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var my_tile_1 = require('../my-tile');
-var angularfire2_1 = require('angularfire2');
 var router_deprecated_1 = require('@angular/router-deprecated');
+var my_events_service_1 = require('../my-events.service');
+var my_users_service_1 = require('../my-users.service');
 var MyUserEventsComponent = (function () {
-    function MyUserEventsComponent(af, router, _ref) {
-        this.af = af;
+    function MyUserEventsComponent(myUsersService, router, myEventsService) {
+        this.myUsersService = myUsersService;
         this.router = router;
-        this._ref = _ref;
+        this.myEventsService = myEventsService;
     }
     MyUserEventsComponent.prototype.onClick = function (id) {
         this.router.navigate(['/My-show-detailsview', { uid: id }]);
@@ -29,9 +27,9 @@ var MyUserEventsComponent = (function () {
     };
     MyUserEventsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.events = this.af.database.list('/events').map(function (events) {
+        this.events = this.myEventsService.getEvents().map(function (events) {
             return events.filter(function (event) {
-                return event.uid.includes(_this._ref.getAuth().uid);
+                return event.uid.includes(_this.myUsersService.loggedInUserId);
             });
         });
     };
@@ -42,11 +40,10 @@ var MyUserEventsComponent = (function () {
             templateUrl: 'my-user-events.component.html',
             styleUrls: ['my-user-events.component.css'],
             directives: [my_tile_1.MyTileComponent]
-        }),
-        __param(2, core_1.Inject(angularfire2_1.FirebaseRef)), 
-        __metadata('design:paramtypes', [angularfire2_1.AngularFire, router_deprecated_1.Router, Object])
+        }), 
+        __metadata('design:paramtypes', [my_users_service_1.MyUsersService, router_deprecated_1.Router, my_events_service_1.MyEventsService])
     ], MyUserEventsComponent);
     return MyUserEventsComponent;
 }());
 exports.MyUserEventsComponent = MyUserEventsComponent;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-user-events/my-user-events.component.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-user-events/my-user-events.component.js.map

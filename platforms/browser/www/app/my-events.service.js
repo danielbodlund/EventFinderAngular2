@@ -17,28 +17,23 @@ var MyEventsService = (function () {
     function MyEventsService(af, ref) {
         this.af = af;
         this.ref = ref;
-        this.event = { name: "",
-            date: "",
-            start_time: "",
-            stop_time: "",
-            info: "",
-            adress: "",
-            comments: [""],
-            price: "",
-            organiser: "",
-            phone: "",
-            email: "",
-            uid: null,
-            imageURL: "" };
     }
     MyEventsService.prototype.getEvent = function (eventId) {
         var _this = this;
         return new Promise(function (resolve) {
             _this.ref.child('/events/' + eventId).on("value", function (a) {
-                resolve(a.val());
+                resolve(a.exportVal());
             });
         });
-        //return new Promise(resolve(this.event));
+    };
+    MyEventsService.prototype.getEvents = function () {
+        return this.af.database.list('/events');
+    };
+    MyEventsService.prototype.updateEvent = function (eventId, data) {
+        return this.ref.child('/events/' + eventId).update(data);
+    };
+    MyEventsService.prototype.removeEvent = function (eventId) {
+        this.ref.child('/events/' + eventId).remove();
     };
     MyEventsService = __decorate([
         core_1.Injectable(),
@@ -48,4 +43,4 @@ var MyEventsService = (function () {
     return MyEventsService;
 }());
 exports.MyEventsService = MyEventsService;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/my-events.service.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-events.service.js.map

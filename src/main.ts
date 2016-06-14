@@ -20,12 +20,13 @@ if (environment.production) {
   enableProdMode();
 }
 
-//document.addEventListener('deviceready', () => {
+document.addEventListener('deviceready', () => {
   bootstrap(EventFinderApp, 
 [
   FIREBASE_PROVIDERS,
   ROUTER_PROVIDERS,
   defaultFirebase('https://sizzling-heat-4438.firebaseio.com'),
+  //storageBucket('gs://sizzling-heat-4438.appspot.com'),
   firebaseAuthConfig({
     method: AuthMethods.Redirect,
     provider: AuthProviders.Password
@@ -33,4 +34,4 @@ if (environment.production) {
   MyUsersService, 
   MyEventsService
 ]);
-//}, false);
+}, false);

@@ -8,36 +8,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
+var angularfire2_1 = require('angularfire2');
 var my_main_1 = require('./my-main');
 var my_detailview_1 = require('./my-detailview');
 var my_show_detailsview_1 = require('./my-show-detailsview');
 var my_profile_settings_1 = require('./my-profile-settings');
 var my_create_account_component_1 = require('./my-create-account/my-create-account.component');
 var my_login_component_1 = require('./my-login/my-login.component');
+var angularfire2_2 = require('angularfire2');
 var common_1 = require('@angular/common');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var my_user_events_1 = require('./my-user-events');
-var my_users_service_1 = require('./my-users.service');
 var EventFinderApp = (function () {
-    function EventFinderApp(router, myUserService) {
+    function EventFinderApp(af, ref, router) {
+        this.af = af;
+        this.ref = ref;
         this.router = router;
-        this.myUserService = myUserService;
-        this.users = {};
         this.disabled = false;
         this.status = { isopen: false };
         this.items = ['The first choice!',
             'And another choice for you.', 'but wait! A third!'];
     }
     EventFinderApp.prototype.ngDoCheck = function () {
-        var _this = this;
         if (this.users === undefined) {
             try {
-                this.myUserService.getUsers().then(function (result) {
-                    _this.users = result;
-                });
-                // this.users =  this.af.database.list('/users/' + this.ref.getAuth().uid);
+                this.users = this.af.database.list('/users/' + this.ref.getAuth().uid);
                 console.log("hej");
             }
             catch (e) {
@@ -54,7 +54,7 @@ var EventFinderApp = (function () {
     };
     EventFinderApp.prototype.logout = function () {
         this.users = undefined;
-        this.myUserService._af.auth.logout();
+        this.af.auth.logout();
     };
     EventFinderApp.prototype.ngOnInit = function () {
         //this.logout();
@@ -82,10 +82,11 @@ var EventFinderApp = (function () {
             { path: '/my-events', name: 'UserEvents', component: my_user_events_1.MyUserEventsComponent },
             { path: '/my-profile-settings', name: 'Settings', component: my_profile_settings_1.MyProfileSettingsComponent },
             { path: '/*path', component: my_main_1.MyMainComponent }
-        ]), 
-        __metadata('design:paramtypes', [router_deprecated_1.Router, my_users_service_1.MyUsersService])
+        ]),
+        __param(1, core_1.Inject(angularfire2_2.FirebaseRef)), 
+        __metadata('design:paramtypes', [angularfire2_1.AngularFire, Object, router_deprecated_1.Router])
     ], EventFinderApp);
     return EventFinderApp;
 }());
 exports.EventFinderApp = EventFinderApp;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-7PClWvdW.tmp/0/app/event-finder.component.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/event-finder.component.js.map
