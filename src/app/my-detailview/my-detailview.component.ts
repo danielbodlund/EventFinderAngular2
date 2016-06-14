@@ -8,7 +8,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import { DateHandlerService } from '../date-handler.service';
 import {MyEventsService} from '../my-events.service';
 import {MyUsersService} from '../my-users.service';
-
+import {MyPlaceAutocompleteComponent} from '../my-place-autocomplete';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +16,7 @@ import {MyUsersService} from '../my-users.service';
   templateUrl: 'my-detailview.component.html',
   styleUrls: ['my-detailview.component.css'],
   providers: [DateHandlerService],
-  directives: [MyCommentComponent],
+  directives: [MyCommentComponent, MyPlaceAutocompleteComponent],
   inputs: ['comments']
 })
 //@CanActivate(() => tokenNotExpired())
