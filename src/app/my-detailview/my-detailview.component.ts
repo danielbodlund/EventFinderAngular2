@@ -174,7 +174,11 @@ export class MyDetailviewComponent implements OnInit {
     }, {
       quality: 1,
       destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.CAMERA
+      sourceType: Camera.PictureSourceType.CAMERA,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        allowEdit: false,
+        correctOrientation: true 
     });
   }
   
@@ -245,7 +249,7 @@ export class MyDetailviewComponent implements OnInit {
 
              console.log("inside gotFile callback 1 ");
              //Kommer inte hit på Android ... alls ... 
-             /*console.log(file);
+             console.log(file);
               var reader = new FileReader();
               reader.onloadend = function(e) {
                 console.log("inside onloadedend callback");
@@ -254,7 +258,7 @@ export class MyDetailviewComponent implements OnInit {
                    callback(content);
               };
               // The most important point, use the readAsDatURL Method from the file plugin
-              reader.readAsDataURL(file);*/
+              reader.readAsDataURL(file);
            });
       console.log("gotFile end");     
       }

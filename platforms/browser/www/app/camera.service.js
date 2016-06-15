@@ -51,4 +51,4 @@ var CameraService = (function () {
     return CameraService;
 }());
 exports.CameraService = CameraService;
-//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/camera.service.js.map
+//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-hODwRxYR.tmp/0/app/camera.service.js.map

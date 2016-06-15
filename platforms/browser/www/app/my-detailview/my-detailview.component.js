@@ -158,7 +158,11 @@ var MyDetailviewComponent = (function () {
         }, {
             quality: 1,
             destinationType: Camera.DestinationType.FILE_URI,
-            sourceType: Camera.PictureSourceType.CAMERA
+            sourceType: Camera.PictureSourceType.CAMERA,
+            encodingType: Camera.EncodingType.JPEG,
+            mediaType: Camera.MediaType.PICTURE,
+            allowEdit: false,
+            correctOrientation: true
         });
     };
     /*
@@ -222,16 +226,16 @@ var MyDetailviewComponent = (function () {
             fileEntry.file(function (file) {
                 console.log("inside gotFile callback 1 ");
                 //Kommer inte hit på Android ... alls ... 
-                /*console.log(file);
-                 var reader = new FileReader();
-                 reader.onloadend = function(e) {
-                   console.log("inside onloadedend callback");
-                   console.log(e);
-                      var content = this.result;
-                      callback(content);
-                 };
-                 // The most important point, use the readAsDatURL Method from the file plugin
-                 reader.readAsDataURL(file);*/
+                console.log(file);
+                var reader = new FileReader();
+                reader.onloadend = function (e) {
+                    console.log("inside onloadedend callback");
+                    console.log(e);
+                    var content = this.result;
+                    callback(content);
+                };
+                // The most important point, use the readAsDatURL Method from the file plugin
+                reader.readAsDataURL(file);
             });
             console.log("gotFile end");
         }
@@ -256,4 +260,4 @@ var MyDetailviewComponent = (function () {
     return MyDetailviewComponent;
 }());
 exports.MyDetailviewComponent = MyDetailviewComponent;
-//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-detailview/my-detailview.component.js.map
+//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-hODwRxYR.tmp/0/app/my-detailview/my-detailview.component.js.map

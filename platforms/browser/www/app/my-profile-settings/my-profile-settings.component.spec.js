@@ -10,4 +10,4 @@ testing_1.describe('MyProfileSettings Component', function () {
         });
     }));
 });
-//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-profile-settings/my-profile-settings.component.spec.js.map
+//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-hODwRxYR.tmp/0/app/my-profile-settings/my-profile-settings.component.spec.js.map
