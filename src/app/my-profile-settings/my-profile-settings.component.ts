@@ -19,6 +19,7 @@ export class MyProfileSettingsComponent implements OnInit {
   oldPassword: string;
   newPassword: string;
   loginNotation: string ='';
+  gravatar: string = this.ref.getAuth().password.profileImageURL;
   
   constructor(@Inject(FirebaseRef) public ref:any, public data: RouteData, public params: RouteParams, private router: Router, public af: AngularFire) {}
   
