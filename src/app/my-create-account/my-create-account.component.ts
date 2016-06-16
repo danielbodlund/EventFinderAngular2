@@ -31,6 +31,11 @@ export class MyCreateAccountComponent implements OnInit {
       var usernameExists: boolean = false;
       let users = this.userService.usersOnce;
       
+      if(this.password.length < 5) {
+        this.createAnnotation = 'Lösenord måste vara mins fem tecken';
+        return;
+      }
+      
       users.then(users => {
         let usersAsList = Object.keys(users).map(key => {
           return users[key];
