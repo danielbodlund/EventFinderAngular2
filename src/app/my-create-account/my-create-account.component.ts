@@ -56,7 +56,7 @@ export class MyCreateAccountComponent implements OnInit {
                 this.createAnnotation = 'Kontot kunde inte skapas på grund av att mejladressen redan används.';
                 break;
               case "INVALID_EMAIL":
-                this.createAnnotation = 'Detta är inte en giltig mail.';
+                this.createAnnotation = 'Detta är inte en giltlig mail.';
                 break;
               default:
                 this.createAnnotation = 'Kunde inte skapa användare: ' + error;
