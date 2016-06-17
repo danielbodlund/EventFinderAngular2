@@ -17,7 +17,7 @@ export class MyProfileSettingsComponent implements OnInit {
   
   email: string;
   oldPassword: string;
-  newPassword: string;
+  newPassword: string = '';
   loginNotation: string ='';
   gravatar: string = this.ref.getAuth().password.profileImageURL;
   
@@ -27,27 +27,34 @@ export class MyProfileSettingsComponent implements OnInit {
   }
   
   changePassword() {
-this.ref.changePassword({
-  email: this.email,
-  oldPassword: this.oldPassword,
-  newPassword: this.newPassword
-}, error => {
-  if (error) {
-    switch (error.code) {
-      case "INVALID_PASSWORD":
-        console.log("The specified user account password is incorrect.");
-        break;
-      case "INVALID_USER":
-        console.log("The specified user account does not exist.");
-        break;
-      default:
-        console.log("Error changing password:", error);
-    }
-  } else {
-    console.log("User password changed successfully!");
-    this.loginNotation = "Lösenord ändrat!";
-  }
-});
-  }
+     // Look for spaces
+      for (let i = 0; i < this.newPassword.length; i++) {
+        if(this.newPassword.charAt(i) === ' ') {
+          this.loginNotation = 'Lösenordet får inte inehålla mellanslag.';
+          return;
+        }
+      }
+      
+    this.ref.changePassword({
+      email: this.email,
+      oldPassword: this.oldPassword,
+      newPassword: this.newPassword
+    }, error => {
+      if (error) {
+        switch (error.code) {
+          case "INVALID_PASSWORD":
+            this.loginNotation = 'Felaktigt lösenord.';
+            break;
+          case "INVALID_USER":
+            this.loginNotation = 'Det finns ingen användare med denna email.';
+            break;
+          default:
+            console.log("Error changing password:", error);
+        }
+      } else {
+        this.loginNotation = "Lösenord ändrat!";
+      }
+    });
+      }
 
 }
