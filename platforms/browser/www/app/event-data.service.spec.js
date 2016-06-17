@@ -6,4 +6,4 @@ testing_1.describe('MockEvent Service', function () {
     testing_1.it('should ...', testing_1.inject([event_data_service_1.EventDataService], function (service) {
     }));
 });
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-hODwRxYR.tmp/0/app/event-data.service.spec.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-goZux1LR.tmp/0/app/event-data.service.spec.js.map

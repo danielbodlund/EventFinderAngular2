@@ -145,40 +145,40 @@ export class MyDetailviewComponent implements OnInit {
   takePicture() {
     console.log("take photo");
     navigator.camera.getPicture((src) => {
-      /*this._zone.run(() => {
+      /*Upload image to storage//this._zone.run(() => {
         console.log("inside zone...");
         //var encodedImgae = window.btoa(src);
         //this.event.imageURL = window.atob(encodedImgae);
         //this.event.imageURL = "data:image/jpeg;base64," + src;
         //this.event.imageURL = this.encodeImageUri(src);
         //console.log(src);
-        //this.cameraService.uploadData(src);
+        this.cameraService.uploadData(src);
         //this.debug(src);
       });*/
       console.log("inside getPicture callback");
       this.getFileContentAsBase64(src, (base64Image) => {
       //window.open(base64Image);
-      console.log(base64Image); 
+      //console.log(base64Image); 
       this._zone.run(() => {
         console.log("inside _zone callback");
         this.event.imageURL = base64Image;
-        console.log(this.event.imageURL);
+        //console.log(this.event.imageURL);
       });
       // Then you'll be able to handle the myimage.png file as base64
       console.log("end of getPicutre success callback");  
     });
     console.log("Last step inside success callback");
-    console.log(this.event.imageURL);  
+    //console.log(this.event.imageURL);  
     }, (error) => {
-      alert("error" + error);
+      console.log("error" + error);
     }, {
-      quality: 1,
+      quality: 20,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
-        encodingType: Camera.EncodingType.JPEG,
+        //encodingType: Camera.EncodingType.JPEG,
         mediaType: Camera.MediaType.PICTURE,
         allowEdit: false,
-        correctOrientation: true 
+        correctOrientation: true
     });
   }
   
@@ -237,7 +237,10 @@ export class MyDetailviewComponent implements OnInit {
     
     getFileContentAsBase64(path,callback){
       console.log("inside getFileContent");
-      window.resolveLocalFileSystemURL(path, gotFile, fail);
+      setTimeout(() => {
+        console.log('C-J next cycle');
+        window.resolveLocalFileSystemURL(path, gotFile, fail);
+      });
       
       function fail(e) {
           alert('Cannot found requested file');
@@ -248,17 +251,44 @@ export class MyDetailviewComponent implements OnInit {
            fileEntry.file(function(file) {
 
              console.log("inside gotFile callback 1 ");
+             console.log("undrar om detta kommer up!")
              //Kommer inte hit på Android ... alls ... 
-             console.log(file);
+             //console.log(file);
               var reader = new FileReader();
-              reader.onloadend = function(e) {
-                console.log("inside onloadedend callback");
+              
+              try {
+                console.log("Vi är förbi new FileReader");
+                
+                //reader.onload = function (e) {
+                  //console.log("inside onloaded callback");
+                  //console.log(e);
+                  //var content = this.result;
+                  //console.log(content + "content");
+                  //console.log(this.result + " this.result");
+                  //callback(content);
+                //};
+                /*reader.onerror = function () {
+                  console.log('ERROR!');
+                  console.log(arguments);
+                };*/
+                reader.onloadend = function(e) {
+                  console.log("inside onloadedend callback");
+                  //console.log(e);
+                  var content = this.result;
+                  //console.log(content + "content");
+                  //console.log(this.result + " this.result");
+                  //setTimeout(function () {
+                    callback(content);
+                  //});
+                };
+                console.log('CJ#1');
+                // The most important point, use the readAsDatURL Method from the file plugin
+                reader.readAsDataURL(file);
+                console.log('CJ#2');
+              } catch(e) {
+                console.log('catch');
                 console.log(e);
-                   var content = this.result;
-                   callback(content);
-              };
-              // The most important point, use the readAsDatURL Method from the file plugin
-              reader.readAsDataURL(file);
+              }
            });
       console.log("gotFile end");     
       }

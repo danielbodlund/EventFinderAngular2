@@ -60,4 +60,4 @@ var MyShowDetailsviewComponent = (function () {
     return MyShowDetailsviewComponent;
 }());
 exports.MyShowDetailsviewComponent = MyShowDetailsviewComponent;
-//# sourceMappingURL=/Users/iths/Documents/VS code projects/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-hODwRxYR.tmp/0/app/my-show-detailsview/my-show-detailsview.component.js.map
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-goZux1LR.tmp/0/app/my-show-detailsview/my-show-detailsview.component.js.map
