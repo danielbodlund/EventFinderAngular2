@@ -31,20 +31,34 @@ export class MyCreateAccountComponent implements OnInit {
       var usernameExists: boolean = false;
       let users = this.userService.usersOnce;
       
+      // Look if the passwords length is smaller than 5
       if(this.password.length < 5) {
         this.createAnnotation = 'Lösenord måste vara mins fem tecken';
         return;
       }
       
+      // Look for spaces
+      for (let i = 0; i < this.password.length; i++) {
+        if(this.password.charAt(i) === ' ') {
+          this.createAnnotation = 'Lösenordet får inte inehålla mellanslag.';
+          return;
+        }
+      }
+      
+      // When we get the user-list callback.
       users.then(users => {
+        
+        // Parse the user object to an array.
         let usersAsList = Object.keys(users).map(key => {
           return users[key];
         });
         
+        // Filter the list to only contain users with the same username as the username variable.
         let arr = usersAsList.filter(value => {
           return value['username'] == this.username;
         });      
         
+        // If the username does not already exist.
         if(arr.length <= 0) {
           var createAccountResult = this.userService.createAccount(this.email, this.password);
           createAccountResult.then(result => {
@@ -61,7 +75,10 @@ export class MyCreateAccountComponent implements OnInit {
               default:
                 this.createAnnotation = 'Kunde inte skapa användare: ' + error;
             }
-          } else {
+          } 
+          
+          // If there where no errors.
+          else {
             this.createAnnotation = '';
             let user : User = { username: this.username,
                                 uid: userData.uid,
@@ -73,12 +90,18 @@ export class MyCreateAccountComponent implements OnInit {
             this.userService.addUser(userData["uid"], user);
             this.router.navigate(['/Login']);
           }}); 
-        } else {
+        } 
+        
+        // If the username already exist.
+        else {
           this.createAnnotation = "Användarnamn finns redan.";
           
         }
       });              
-    } else {
+    } 
+    
+    // If the one or more textfields where empty.
+    else {
       this.createAnnotation = 'You need to fill all the textfields.'
     }
   }
