@@ -21,6 +21,10 @@ export class Carousel implements PipeTransform {
       // Filter out invalid dates.
       newItems = newItems.filter(a => {
         let date = Number(a['start_date']);
+        let currentDate = Number(new Date().toLocaleDateString().replace(/-/gi, ''));
+        if (date < currentDate) {
+          return false;
+        }
         return !isNaN(date);
       });
       

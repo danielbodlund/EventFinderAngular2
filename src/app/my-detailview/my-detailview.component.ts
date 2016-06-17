@@ -62,7 +62,11 @@ export class MyDetailviewComponent implements OnInit {
     var x : FullEvent = this.event
     if (!this.checkValue()) {
       alert("Fyll i alla fält!")
-      return false
+      return false;
+    }
+    if (!this.checkDate(x.start_date) || !this.checkDate(x.end_date)) {
+      alert("Datum är inte korrekt ifyllt!");
+      return false;
     }
     this.checkPicture();
 
@@ -80,6 +84,16 @@ export class MyDetailviewComponent implements OnInit {
       this.router.navigate(['/My-show-detailsview', { uid: x.uid }]);
       return false;
     }
+  }
+  
+  checkDate(date: string){
+    if (date.length !== 10) {
+      return false;
+    }
+    if (date[4] !== '-' && date[7] !== '-') {
+      return false;
+    }
+    return true;
   }
 
   checkValue() {
