@@ -13,8 +13,11 @@ export class MyPlaceAutocompleteComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.initMap();
+  }
 
-    function initMap() {
+  initMap() {
+        console.log('init map');
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -33.8688, lng: 151.2195},
           zoom: 13
@@ -88,6 +91,5 @@ export class MyPlaceAutocompleteComponent implements OnInit {
         setupClickListener('changetype-establishment', ['establishment']);
         setupClickListener('changetype-geocode', ['geocode']);
       }
-  }
-
+      
 }

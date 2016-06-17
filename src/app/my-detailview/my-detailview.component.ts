@@ -8,7 +8,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import { DateHandlerService } from '../date-handler.service';
 import {MyEventsService} from '../my-events.service';
 import {MyUsersService} from '../my-users.service';
-import {MyPlaceAutocompleteComponent} from '../my-place-autocomplete';
+import {MyPlaceAutocompleteComponent} from '../my-place-autocomplete/index';
 
 @Component({
   moduleId: module.id,

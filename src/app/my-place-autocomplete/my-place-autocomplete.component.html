@@ -1,4 +1,4 @@
-<input id="pac-input" class="controls" type="text"
+<input id="pac-input" [(ngModel)]='input' class="controls" type="text"
         placeholder="Enter a location">
     <div id="type-selector" class="controls">
       <input type="radio" name="type" id="changetype-all" checked="checked">
@@ -14,3 +14,6 @@
       <label for="changetype-geocode">Geocodes</label>
     </div>
     <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNASfKo4WSwWpqWrJXpd-L3SyzubiAll0&libraries=places&callback=initMap"
+        async defer></script>
