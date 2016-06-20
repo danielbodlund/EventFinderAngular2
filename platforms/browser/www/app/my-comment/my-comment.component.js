@@ -40,6 +40,7 @@ var MyCommentComponent = (function () {
         var time = this.dateHandlerService.getTime();
         var comment = {
             username: "Anonym",
+            gravatar: 'none',
             time: time,
             date: date,
             text: text
@@ -49,6 +50,8 @@ var MyCommentComponent = (function () {
                 // Get the username of the logged in user.
                 this.ref.child('/users/' + this.ref.getAuth().uid).once('value', function (user) {
                     comment.username = user.val().username;
+                    comment.gravatar = _this.ref.getAuth().password.profileImageURL;
+                    console.log(comment.gravatar);
                     _this.ref.child('/events').child('/' + _this.uid).child('/comments/' + _this.comments.length).update(comment);
                     _this.commentText = "";
                     return false;
@@ -101,7 +104,11 @@ var MyCommentComponent = (function () {
 }());
 exports.MyCommentComponent = MyCommentComponent;
 <<<<<<< HEAD
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/my-comment/my-comment.component.js.map
+=======
+<<<<<<< HEAD
 //# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-comment/my-comment.component.js.map
 =======
 //# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-comment/my-comment.component.js.map
 >>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
+>>>>>>> a5ab894e56d3488e8ba4991ea7829f88e617fc3b

@@ -16,9 +16,9 @@ var Search = (function () {
         if (value !== undefined) {
             return value.map(function (items) {
                 // Filtered array of names
-                var arr = items.filter(function (item) { return item.name.toLocaleLowerCase().includes(term); });
+                var arr = items.filter(function (item) { return item.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()); });
                 // Filtered array of info
-                var arr2 = items.filter(function (item) { return item.description.toLocaleLowerCase().includes(term); });
+                var arr2 = items.filter(function (item) { return item.description.toLocaleLowerCase().includes(term.toLocaleLowerCase()); });
                 // Adds the two arrays togheter and removes duplicates
                 var result = arr.concat(arr2.filter(function (item) {
                     return arr.indexOf(item) < 0;
@@ -40,7 +40,11 @@ var Search = (function () {
 }());
 exports.Search = Search;
 <<<<<<< HEAD
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/search.pipe.js.map
+=======
+<<<<<<< HEAD
 //# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/search.pipe.js.map
 =======
 //# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/search.pipe.js.map
 >>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
+>>>>>>> a5ab894e56d3488e8ba4991ea7829f88e617fc3b

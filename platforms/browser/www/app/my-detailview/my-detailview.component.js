@@ -70,6 +70,10 @@ var MyDetailviewComponent = (function () {
             alert("Fyll i alla fält!");
             return false;
         }
+        if (!this.checkDate(x.start_date) || !this.checkDate(x.end_date)) {
+            alert("Datum är inte korrekt ifyllt!");
+            return false;
+        }
         this.checkPicture();
         // If the user is creating a new event.
         if (this.newEvent) {
@@ -84,6 +88,15 @@ var MyDetailviewComponent = (function () {
             this.router.navigate(['/My-show-detailsview', { uid: x.uid }]);
             return false;
         }
+    };
+    MyDetailviewComponent.prototype.checkDate = function (date) {
+        if (date.length !== 10) {
+            return false;
+        }
+        if (date[4] !== '-' && date[7] !== '-') {
+            return false;
+        }
+        return true;
     };
     MyDetailviewComponent.prototype.checkValue = function () {
         console.log("inside checkValue");
@@ -272,7 +285,11 @@ var MyDetailviewComponent = (function () {
 }());
 exports.MyDetailviewComponent = MyDetailviewComponent;
 <<<<<<< HEAD
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/my-detailview/my-detailview.component.js.map
+=======
+<<<<<<< HEAD
 //# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-detailview/my-detailview.component.js.map
 =======
 //# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-detailview/my-detailview.component.js.map
 >>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
+>>>>>>> a5ab894e56d3488e8ba4991ea7829f88e617fc3b

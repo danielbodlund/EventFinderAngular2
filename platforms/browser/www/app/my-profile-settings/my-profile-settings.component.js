@@ -21,12 +21,21 @@ var MyProfileSettingsComponent = (function () {
         this.params = params;
         this.router = router;
         this.af = af;
+        this.newPassword = '';
         this.loginNotation = '';
+        this.gravatar = this.ref.getAuth().password.profileImageURL;
     }
     MyProfileSettingsComponent.prototype.ngOnInit = function () {
     };
     MyProfileSettingsComponent.prototype.changePassword = function () {
         var _this = this;
+        // Look for spaces
+        for (var i = 0; i < this.newPassword.length; i++) {
+            if (this.newPassword.charAt(i) === ' ') {
+                this.loginNotation = 'Lösenordet får inte inehålla mellanslag.';
+                return;
+            }
+        }
         this.ref.changePassword({
             email: this.email,
             oldPassword: this.oldPassword,
@@ -35,17 +44,16 @@ var MyProfileSettingsComponent = (function () {
             if (error) {
                 switch (error.code) {
                     case "INVALID_PASSWORD":
-                        console.log("The specified user account password is incorrect.");
+                        _this.loginNotation = 'Felaktigt lösenord.';
                         break;
                     case "INVALID_USER":
-                        console.log("The specified user account does not exist.");
+                        _this.loginNotation = 'Det finns ingen användare med denna email.';
                         break;
                     default:
                         console.log("Error changing password:", error);
                 }
             }
             else {
-                console.log("User password changed successfully!");
                 _this.loginNotation = "Lösenord ändrat!";
             }
         });
@@ -64,7 +72,11 @@ var MyProfileSettingsComponent = (function () {
 }());
 exports.MyProfileSettingsComponent = MyProfileSettingsComponent;
 <<<<<<< HEAD
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/my-profile-settings/my-profile-settings.component.js.map
+=======
+<<<<<<< HEAD
 //# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-profile-settings/my-profile-settings.component.js.map
 =======
 //# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-profile-settings/my-profile-settings.component.js.map
 >>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
+>>>>>>> a5ab894e56d3488e8ba4991ea7829f88e617fc3b
