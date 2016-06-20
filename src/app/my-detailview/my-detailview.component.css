@@ -25,6 +25,7 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 legend {
@@ -83,6 +84,10 @@ label {
   visibility: hidden;
 }
 
+.picHint {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .container {
     width: 90%;
@@ -98,6 +103,17 @@ label {
   }
   .cameraUtils {
     visibility: hidden;
+  }
+  
+  .test-thing {
+    display: none;
+  }
+  
+  .picHint {
+    display: block;
+    color: white;
+    text-align: center;
+    font-size: 10px;
   }
 }
 
