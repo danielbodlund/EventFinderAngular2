@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Inject} from '@angular/core';
 import {Comment} from '../IComment';
-import {AngularFire, FirebaseListObservable, FirebaseObjectObservable, FirebaseRef} from 'angularfire2';
+import {FirebaseListObservable, FirebaseObjectObservable, FirebaseRef} from 'angularfire2';
+import {AngularFire} from 'angularfire2';
 import {Http} from '@angular/http';
 import {MyReverseArray} from '../my-reverse-array.pipe'
 import { DateHandlerService} from '../date-handler.service'
@@ -10,14 +11,14 @@ import { DateHandlerService} from '../date-handler.service'
   selector: 'my-comment',
   templateUrl: 'my-comment.component.html',
   styleUrls: ['my-comment.component.css'],
-  providers: [DateHandlerService],
+  providers: [DateHandlerService, AngularFire],
   pipes: [MyReverseArray]
 })
 export class MyCommentComponent implements OnInit {
   @Input()uid 
   comments: Comment[]
   commentText =  ""
-  constructor(private dateHandlerService: DateHandlerService, @Inject(FirebaseRef) public ref:any) {}
+  constructor(public af: AngularFire, private dateHandlerService: DateHandlerService, @Inject(FirebaseRef) public ref:any) {}
   
   ngOnInit() {
   //  this._mcs.getComments().(r => this.comments = r);
@@ -38,7 +39,7 @@ export class MyCommentComponent implements OnInit {
     var time = this.dateHandlerService.getTime();
     var comment : Comment = {
         username: "Anonym",
-        gravatar: 'none',
+        gravatar: '../gravatar.png',
         time: time,
         date: date,
         text: text
@@ -49,7 +50,7 @@ export class MyCommentComponent implements OnInit {
         this.ref.child('/users/' + this.ref.getAuth().uid).once('value', user => {
           comment.username = user.val().username;
           comment.gravatar = this.ref.getAuth().password.profileImageURL;
-          console.log(comment.gravatar);
+          
           this.ref.child('/events').child('/'+this.uid).child('/comments/'+this.comments.length).update(comment);
           this.commentText = "";
           return false;
