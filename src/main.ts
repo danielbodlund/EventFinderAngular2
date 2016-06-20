@@ -20,7 +20,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener('deviceready', () => {
+//document.addEventListener('deviceready', () => {
   bootstrap(EventFinderApp, 
 [
   FIREBASE_PROVIDERS,
@@ -34,4 +34,4 @@ document.addEventListener('deviceready', () => {
   MyUsersService, 
   MyEventsService
 ]);
-}, false);
+//}, false);

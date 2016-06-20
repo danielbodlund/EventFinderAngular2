@@ -176,7 +176,7 @@ export class MyDetailviewComponent implements OnInit {
       this._zone.run(() => {
         console.log("inside _zone callback");
         this.event.imageURL = base64Image;
-        console.log(this.event.imageURL);
+        //console.log(this.event.imageURL);
       });
       // Then you'll be able to handle the myimage.png file as base64
       console.log("end of getPicutre success callback");  
@@ -186,9 +186,12 @@ export class MyDetailviewComponent implements OnInit {
     }, (error) => {
       alert("error" + error);
     }, {
-      quality: 1,
+      quality: 20,
       destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.CAMERA
+      sourceType: Camera.PictureSourceType.CAMERA,
+      mediaType: Camera.MediaType.PICTURE,
+      allowEdit: false,
+      correctOrientation: true
     });
   }
   
@@ -247,7 +250,10 @@ export class MyDetailviewComponent implements OnInit {
     
     getFileContentAsBase64(path,callback){
       console.log("inside getFileContent");
-      window.resolveLocalFileSystemURL(path, gotFile, fail);
+      setTimeout(() => {
+        window.resolveLocalFileSystemURL(path, gotFile, fail);
+      });
+      
       
       function fail(e) {
           alert('Cannot found requested file');
@@ -259,7 +265,7 @@ export class MyDetailviewComponent implements OnInit {
 
              console.log("inside gotFile callback 1 ");
              //Kommer inte hit på Android ... alls ... 
-             /*console.log(file);
+             console.log(file);
               var reader = new FileReader();
               reader.onloadend = function(e) {
                 console.log("inside onloadedend callback");
@@ -268,7 +274,7 @@ export class MyDetailviewComponent implements OnInit {
                    callback(content);
               };
               // The most important point, use the readAsDatURL Method from the file plugin
-              reader.readAsDataURL(file);*/
+              reader.readAsDataURL(file);
            });
       console.log("gotFile end");     
       }
