@@ -26,32 +26,63 @@ var MyCreateAccountComponent = (function () {
         var _this = this;
         var self;
         if (this.email !== '' && this.password !== '' && this.username !== '') {
-            var createAccountResult = this.userService.createAccount(this.email, this.password);
-            createAccountResult.then(function (result) {
-                var error = result["error"];
-                var userData = result["userData"];
-                if (error) {
-                    switch (error.code) {
-                        case "EMAIL_TAKEN":
-                            _this.createAnnotation = 'Kontot kunde inte skapas på grund av att mejladressen redan används.';
-                            break;
-                        case "INVALID_EMAIL":
-                            _this.createAnnotation = 'Detta är inte en giltig mail.';
-                            break;
-                        default:
-                            _this.createAnnotation = 'Kunde inte skapa användare: ' + error;
-                    }
+            var usernameExists = false;
+            var users = this.userService.usersOnce;
+            // Look if the passwords length is smaller than 5
+            if (this.password.length < 5) {
+                this.createAnnotation = 'Lösenord måste vara mins fem tecken';
+                return;
+            }
+            // Look for spaces
+            for (var i = 0; i < this.password.length; i++) {
+                if (this.password.charAt(i) === ' ') {
+                    this.createAnnotation = 'Lösenordet får inte inehålla mellanslag.';
+                    return;
+                }
+            }
+            // When we get the user-list callback.
+            users.then(function (users) {
+                // Parse the user object to an array.
+                var usersAsList = Object.keys(users).map(function (key) {
+                    return users[key];
+                });
+                // Filter the list to only contain users with the same username as the username variable.
+                var arr = usersAsList.filter(function (value) {
+                    return value['username'] == _this.username;
+                });
+                // If the username does not already exist.
+                if (arr.length <= 0) {
+                    var createAccountResult = _this.userService.createAccount(_this.email, _this.password);
+                    createAccountResult.then(function (result) {
+                        var error = result["error"];
+                        var userData = result["userData"];
+                        if (error) {
+                            switch (error.code) {
+                                case "EMAIL_TAKEN":
+                                    _this.createAnnotation = 'Kontot kunde inte skapas på grund av att mejladressen redan används.';
+                                    break;
+                                case "INVALID_EMAIL":
+                                    _this.createAnnotation = 'Detta är inte en giltlig mail.';
+                                    break;
+                                default:
+                                    _this.createAnnotation = 'Kunde inte skapa användare: ' + error;
+                            }
+                        }
+                        else {
+                            _this.createAnnotation = '';
+                            var user = { username: _this.username,
+                                uid: userData.uid,
+                                events: [''],
+                                firstName: '',
+                                lastName: '',
+                                email: _this.email };
+                            _this.userService.addUser(userData["uid"], user);
+                            _this.router.navigate(['/Login']);
+                        }
+                    });
                 }
                 else {
-                    _this.createAnnotation = '';
-                    var user = { username: _this.username,
-                        uid: userData.uid,
-                        events: [''],
-                        firstName: '',
-                        lastName: '',
-                        email: _this.email };
-                    _this.userService.addUser(userData["uid"], user);
-                    _this.router.navigate(['/Login']);
+                    _this.createAnnotation = "Användarnamn finns redan.";
                 }
             });
         }
@@ -71,4 +102,4 @@ var MyCreateAccountComponent = (function () {
     return MyCreateAccountComponent;
 }());
 exports.MyCreateAccountComponent = MyCreateAccountComponent;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-create-account/my-create-account.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/my-create-account/my-create-account.component.js.map

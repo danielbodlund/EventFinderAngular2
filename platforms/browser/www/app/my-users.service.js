@@ -18,6 +18,18 @@ var MyUsersService = (function () {
         this._af = _af;
         this._ref = _ref;
     }
+    Object.defineProperty(MyUsersService.prototype, "usersOnce", {
+        get: function () {
+            var _this = this;
+            return new Promise(function (resolve) {
+                _this._ref.child('/users').once('value', function (snapshot) {
+                    resolve(snapshot.val());
+                });
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
     MyUsersService.prototype.createAccount = function (email, password) {
         var _this = this;
         return new Promise(function (resolve) {
@@ -97,4 +109,4 @@ var MyUsersService = (function () {
     return MyUsersService;
 }());
 exports.MyUsersService = MyUsersService;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-users.service.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/my-users.service.js.map

@@ -59,6 +59,10 @@ var MyDetailviewComponent = (function () {
             alert("Fyll i alla fält!");
             return false;
         }
+        if (!this.checkDate(x.start_date) || !this.checkDate(x.end_date)) {
+            alert("Datum är inte korrekt ifyllt!");
+            return false;
+        }
         this.checkPicture();
         // If the user is creating a new event.
         if (this.newEvent) {
@@ -73,6 +77,15 @@ var MyDetailviewComponent = (function () {
             this.router.navigate(['/My-show-detailsview', { uid: x.uid }]);
             return false;
         }
+    };
+    MyDetailviewComponent.prototype.checkDate = function (date) {
+        if (date.length !== 10) {
+            return false;
+        }
+        if (date[4] !== '-' && date[7] !== '-') {
+            return false;
+        }
+        return true;
     };
     MyDetailviewComponent.prototype.checkValue = function () {
         console.log("inside checkValue");
@@ -137,4 +150,4 @@ var MyDetailviewComponent = (function () {
     return MyDetailviewComponent;
 }());
 exports.MyDetailviewComponent = MyDetailviewComponent;
-//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-detailview/my-detailview.component.js.map
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/my-detailview/my-detailview.component.js.map
