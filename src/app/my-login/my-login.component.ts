@@ -20,17 +20,21 @@ export class MyLoginComponent implements OnInit {
   }
   
   login() {
-    this._ref.authWithPassword({
-       email    : this.email,
-       password : this.password
-      }, (error, authData) => {
-       if (error) {
-        this.loginNotation = error;
-       } else {
-        this.router.navigate(['/Home']);
-        this.loginNotation = '';
-      }
-    });
+    if(this.email === '' || this.email === undefined || this.password === '' || this.password === undefined) {
+      this.loginNotation = 'Alla fält måste vara ifyllda.'
+    }else {
+      this._ref.authWithPassword({
+        email    : this.email,
+        password : this.password
+        }, (error, authData) => {
+        if (error) {
+          this.loginNotation = error;
+        } else {
+          this.router.navigate(['/Home']);
+          this.loginNotation = '';
+        }
+      });
+    }
   }
   
   resetPassword() {

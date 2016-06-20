@@ -26,6 +26,7 @@ if (environment.production) {
   FIREBASE_PROVIDERS,
   ROUTER_PROVIDERS,
   defaultFirebase('https://sizzling-heat-4438.firebaseio.com'),
+  //storageBucket('gs://sizzling-heat-4438.appspot.com'),
   firebaseAuthConfig({
     method: AuthMethods.Redirect,
     provider: AuthProviders.Password

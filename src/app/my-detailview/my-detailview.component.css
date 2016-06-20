@@ -79,10 +79,25 @@ label {
   background-color: rgba(253, 187, 181, 1);
 }
 
+.photoButton {
+  visibility: hidden;
+}
+
 @media (max-width: 768px) {
   .container {
     width: 90%;
     padding: 10px;
+  }
+  
+  .photoButton {
+    visibility: hidden;
+  }
+  
+  .photoURL {
+    visibility: hidden;
+  }
+  .cameraUtils {
+    visibility: hidden;
   }
 }
 

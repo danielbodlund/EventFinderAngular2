@@ -14,6 +14,7 @@ var Carousel = (function () {
     }
     Carousel.prototype.transform = function (value, term) {
         return value.map(function (items) {
+<<<<<<< HEAD
             // Remove the '-' from the date so that we can filter the list later.
             var newItems = items.map(function (a) {
                 a['start_date'] = a['start_date'].replace(/-/gi, '');
@@ -37,6 +38,23 @@ var Carousel = (function () {
                 }
                 if (num1 > num2) {
                     return 1;
+=======
+            var itemIndex = -1;
+            // Filtered array of names
+            items = items.reverse();
+            var arr = items.filter(function (item) {
+<<<<<<< HEAD
+                console.log(item.start_date === dateHandler.getDate());
+                if (item.start_date === dateHandler.getDate()) {
+                    console.log(item);
+                    return item;
+=======
+                if (itemIndex < 4) {
+                    console.log(itemIndex);
+                    itemIndex += 1;
+                    return items[itemIndex];
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
+>>>>>>> a5ab894e56d3488e8ba4991ea7829f88e617fc3b
                 }
                 return 0;
             });
@@ -70,4 +88,12 @@ var Carousel = (function () {
     return Carousel;
 }());
 exports.Carousel = Carousel;
+<<<<<<< HEAD
 //# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-ctFrWcLO.tmp/0/app/carousel.pipe.js.map
+=======
+<<<<<<< HEAD
+//# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/carousel.pipe.js.map
+=======
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/carousel.pipe.js.map
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
+>>>>>>> a5ab894e56d3488e8ba4991ea7829f88e617fc3b

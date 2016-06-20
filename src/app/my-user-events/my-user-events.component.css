@@ -55,7 +55,6 @@ legend {
 
 @media (min-width:651px) and (max-width: 992px) {
   .add-event {
-    /*height: 208px;*/
     height: 207px;
     width: 190px;
     padding: 0px;
@@ -70,7 +69,6 @@ legend {
 @media (max-width: 650px) {
   .add-event {
   width: 140px;
-  /*height: 160px;*/
   height: 159px;
   padding: 0px;
   margin: 5px;
