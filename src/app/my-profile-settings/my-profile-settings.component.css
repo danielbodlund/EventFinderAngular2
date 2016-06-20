@@ -20,6 +20,13 @@ button:hover {
   background-color: rgba(253, 187, 181, 1);
 }
 
+h1 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
 
 h5 {
   color: rgba(255, 0, 0, 1);

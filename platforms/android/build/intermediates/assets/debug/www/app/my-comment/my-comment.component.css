@@ -1,0 +1,48 @@
+img.img-responsive.user-photo {
+  max-height: 90px;
+  margin-right: 10px;
+}
+
+
+.comment {
+  width: 100%;
+}
+
+.no-comments {
+  color: white;
+}
+
+.new_message {
+  width: 100%;
+}
+
+.tile {
+  display: inline-flex;
+  width: 100%;
+}
+
+.header {
+  display: inline-block;
+  width: 100%;
+}
+
+.date {
+  float: right;
+  
+}
+
+.panel.panel-default {
+  width: 100%;
+  min-height: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+@media (max-width: 750px) and (orientation: portrait) {
+  
+  img.img-responsive.user-photo {
+    max-height: 40px;
+  }
+}

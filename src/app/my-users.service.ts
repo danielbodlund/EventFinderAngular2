@@ -4,7 +4,15 @@ import {AngularFire, FirebaseRef} from 'angularfire2/angularfire2'
 @Injectable()
 export class MyUsersService {
 
-  constructor(public _af : AngularFire, @Inject(FirebaseRef) private _ref: any) {}
+  constructor(public _af : AngularFire, @Inject(FirebaseRef) public _ref: any) {}
+  
+  get usersOnce() {
+    return new Promise(resolve => {
+      this._ref.child('/users').once('value', (snapshot) => {
+        resolve(snapshot.val());
+      });
+    });
+  }
   
   createAccount(email: string, password: string){    
     return new Promise(resolve => {        

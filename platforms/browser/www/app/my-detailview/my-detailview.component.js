@@ -14,17 +14,25 @@ var router_deprecated_1 = require('@angular/router-deprecated');
 var date_handler_service_1 = require('../date-handler.service');
 var my_events_service_1 = require('../my-events.service');
 var my_users_service_1 = require('../my-users.service');
+<<<<<<< HEAD
 var camera_service_1 = require('../camera.service');
 var MyDetailviewComponent = (function () {
     function MyDetailviewComponent(myUsersService, myEventsService, dateHandlerService, data, params, router, _zone, cameraService) {
+=======
+var MyDetailviewComponent = (function () {
+    function MyDetailviewComponent(myUsersService, myEventsService, dateHandlerService, data, params, router) {
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
         this.myUsersService = myUsersService;
         this.myEventsService = myEventsService;
         this.dateHandlerService = dateHandlerService;
         this.data = data;
         this.params = params;
         this.router = router;
+<<<<<<< HEAD
         this._zone = _zone;
         this.cameraService = cameraService;
+=======
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
         this.eventId = "";
         this.newEvent = false;
         this.event = { name: "",
@@ -125,6 +133,7 @@ var MyDetailviewComponent = (function () {
         }
         return false;
     };
+<<<<<<< HEAD
     MyDetailviewComponent.prototype.takePicture = function () {
         var _this = this;
         console.log("take photo");
@@ -241,6 +250,8 @@ var MyDetailviewComponent = (function () {
         console.log(stuff);
         this.cameraService.uploadData(stuff);
     };
+=======
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
     MyDetailviewComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -251,9 +262,17 @@ var MyDetailviewComponent = (function () {
             directives: [my_comment_1.MyCommentComponent],
             inputs: ['comments']
         }), 
+<<<<<<< HEAD
         __metadata('design:paramtypes', [my_users_service_1.MyUsersService, my_events_service_1.MyEventsService, date_handler_service_1.DateHandlerService, router_deprecated_1.RouteData, router_deprecated_1.RouteParams, router_deprecated_1.Router, core_1.NgZone, camera_service_1.CameraService])
+=======
+        __metadata('design:paramtypes', [my_users_service_1.MyUsersService, my_events_service_1.MyEventsService, date_handler_service_1.DateHandlerService, router_deprecated_1.RouteData, router_deprecated_1.RouteParams, router_deprecated_1.Router])
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
     ], MyDetailviewComponent);
     return MyDetailviewComponent;
 }());
 exports.MyDetailviewComponent = MyDetailviewComponent;
+<<<<<<< HEAD
 //# sourceMappingURL=/Users/iths/Documents/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0gewjfj5.tmp/0/app/my-detailview/my-detailview.component.js.map
+=======
+//# sourceMappingURL=/Users/iths/html/gitHtml/event/EventFinder2/EventFinderAngular2/tmp/broccoli_type_script_compiler-input_base_path-0UUNcpb2.tmp/0/app/my-detailview/my-detailview.component.js.map
+>>>>>>> f28564982a93b30eb82b4e6ff76581ab402783ce
